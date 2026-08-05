@@ -1,0 +1,84 @@
+{
+  "upcoming": [
+    {
+      "id": "ev-u1",
+      "title": "MFW Wrap-Up Night",
+      "date": "2024-09-25",
+      "time": "20:00",
+      "location": "Bocconi University, Aula Magna",
+      "description": "Our annual wrap-up evening following Milan Fashion Week SS25. Panel discussion, networking, and cocktails.",
+      "poster": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+      "signupLink": "https://forms.example.com/mfw-wrapup",
+      "category": "panel"
+    },
+    {
+      "id": "ev-u2",
+      "title": "Aperitivo with Alumni",
+      "date": "2024-10-10",
+      "time": "18:30",
+      "location": "Navigli, Milan",
+      "description": "An informal networking evening connecting current members with our alumni network in the fashion industry.",
+      "poster": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&q=80",
+      "signupLink": "https://forms.example.com/alumni-aperitivo",
+      "category": "networking"
+    },
+    {
+      "id": "ev-u3",
+      "title": "BS4F Fall Applications Open",
+      "date": "2024-10-15",
+      "time": "All day",
+      "location": "Online",
+      "description": "Applications for the new cohort of BS4F members open. Join the team shaping fashion culture at Bocconi.",
+      "poster": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80",
+      "signupLink": "https://forms.example.com/applications",
+      "category": "recruitment"
+    }
+  ],
+  "past": [
+    {
+      "id": "ev-p1",
+      "title": "Paris Fashion Week Coverage",
+      "date": "2024-03-01",
+      "year": "2024",
+      "location": "Paris, France",
+      "description": "BS4F sent a delegation to cover PFW AW24. Our journalists attended shows and produced a full editorial series.",
+      "coverImage": "https://images.unsplash.com/photo-1558618047-f9f3e74f4c5e?w=800&q=80",
+      "photos": [
+        "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80",
+        "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=800&q=80",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+      ],
+      "speakers": ["Creative Director, Maison X", "Buying Director, Luisa Via Roma"],
+      "organizer": "BS4F Events Team"
+    },
+    {
+      "id": "ev-p2",
+      "title": "Milan Fashion Week AW24",
+      "date": "2024-02-20",
+      "year": "2024",
+      "location": "Milan, Italy",
+      "description": "Full coverage of MFW AW24 — show attendance, backstage access, and an exclusive panel evening at Bocconi.",
+      "coverImage": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
+      "photos": [
+        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
+        "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80"
+      ],
+      "speakers": ["Bocconi Fashion Economics Prof.", "Brand Director, OTB Group"],
+      "organizer": "BS4F Events Team"
+    },
+    {
+      "id": "ev-p3",
+      "title": "Sustainability in Luxury Panel",
+      "date": "2023-11-15",
+      "year": "2023",
+      "location": "Bocconi University",
+      "description": "A moderated panel on ESG practices in the luxury fashion industry, featuring speakers from Kering and Moncler.",
+      "coverImage": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80",
+      "photos": [
+        "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80"
+      ],
+      "speakers": ["Sustainability Director, Kering", "CSR Manager, Moncler"],
+      "organizer": "BS4F & Bocconi SDG Lab"
+    }
+  ]
+}

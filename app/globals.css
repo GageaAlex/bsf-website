@@ -3,25 +3,105 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0A0A0A;
+  --foreground: #F5F0EB;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+/* Force Times New Roman on all elements */
+*, *::before, *::after {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #C0392B;
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: #C0392B;
+  color: #F5F0EB;
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Editorial typography helpers */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .font-serif {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .font-display {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .font-sans {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .tracking-editorial {
+    letter-spacing: 0.15em;
+  }
+
+  .tracking-wide-xl {
+    letter-spacing: 0.3em;
+  }
+}
+
+/* Page transition overlay */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Grain/noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
 }

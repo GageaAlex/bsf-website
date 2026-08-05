@@ -1,101 +1,115 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
 
-export default function Home() {
+export default function SplashPage() {
+  const router = useRouter();
+  const [leaving, setLeaving] = useState(false);
+
+  const handleEnter = () => {
+    setLeaving(true);
+    setTimeout(() => router.push("/home"), 900);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="relative min-h-screen w-full overflow-hidden bg-obsidian flex items-center justify-center">
+      {/* Background image */}
+      <motion.div
+        initial={{ scale: 1.08, opacity: 0 }}
+        animate={{ scale: leaving ? 1.15 : 1.02, opacity: leaving ? 0 : 1 }}
+        transition={{ duration: leaving ? 0.9 : 6, ease: leaving ? [0.76, 0, 0.24, 1] : "easeOut" }}
+        className="absolute inset-0"
+      >
         <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/mfw-prada.jpg"
+          alt="Prada FW24 Menswear — Milan Fashion Week"
+          fill
           priority
+          className="object-cover object-center"
+          sizes="100vw"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-obsidian/65" />
+        {/* Bottom gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-obsidian to-transparent" />
+        {/* Top gradient */}
+        <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-obsidian/40 to-transparent" />
+      </motion.div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      {/* Content */}
+      <motion.div
+        animate={leaving ? { opacity: 0, y: -30 } : {}}
+        transition={{ duration: 0.5 }}
+        className="relative z-10 flex flex-col items-center gap-10 px-6 text-center"
+      >
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, letterSpacing: "0.5em" }}
+          animate={{ opacity: 1, letterSpacing: "0.3em" }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="text-2xs text-ivory/50 uppercase font-sans tracking-[0.3em]"
+        >
+          Bocconi University &nbsp;·&nbsp; Milan
+        </motion.p>
+
+        {/* Logo — white crest replaces the text "BS4F" */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="w-[clamp(220px,40vw,480px)]"
         >
           <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/bs4f-logo-white.png"
+            alt="Bocconi Students for Fashion"
+            width={925}
+            height={675}
+            className="w-full h-auto object-contain drop-shadow-[0_2px_24px_rgba(255,255,255,0.12)]"
+            priority
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        </motion.div>
+
+        {/* Enter button */}
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 1.0 }}
+          onClick={handleEnter}
+          className="group relative mt-2 px-10 py-4 border border-ivory/30 text-ivory text-xs tracking-[0.25em] uppercase font-sans overflow-hidden hover:border-ivory/80 transition-colors duration-500"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          {/* Fill on hover */}
+          <span className="absolute inset-0 bg-ember translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]" />
+          <span className="relative">Enter</span>
+        </motion.button>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-10 bg-gradient-to-b from-ivory/50 to-transparent"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <span className="text-2xs text-ivory/40 tracking-[0.25em] uppercase">Scroll</span>
+        </motion.div>
+      </motion.div>
+
+      {/* Corner tag */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.35 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-8 right-8 text-2xs text-ivory/50 tracking-editorial uppercase font-sans hidden sm:block"
+      >
+        Est. 2022
+      </motion.div>
     </div>
   );
 }

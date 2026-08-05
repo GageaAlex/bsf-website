@@ -1,0 +1,17 @@
+[
+  { "id": "g1", "src": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", "alt": "MFW SS24 coverage", "category": "events" },
+  { "id": "g2", "src": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", "alt": "Editorial shoot", "category": "editorial" },
+  { "id": "g3", "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80", "alt": "Runway details", "category": "events" },
+  { "id": "g4", "src": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80", "alt": "PFW backstage", "category": "events" },
+  { "id": "g5", "src": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80", "alt": "Team aperitivo", "category": "social" },
+  { "id": "g6", "src": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80", "alt": "Sustainability panel", "category": "events" },
+  { "id": "g7", "src": "https://images.unsplash.com/photo-1558171813-c9d35ae66095?w=800&q=80", "alt": "Fashion archive", "category": "editorial" },
+  { "id": "g8", "src": "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=800&q=80", "alt": "Industry interview setup", "category": "editorial" },
+  { "id": "g9", "src": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80", "alt": "Team photo 2024", "category": "social" },
+  { "id": "g10", "src": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80", "alt": "Street style Milan", "category": "editorial" },
+  { "id": "g11", "src": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80", "alt": "Runway front row", "category": "events" },
+  { "id": "g12", "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80", "alt": "Fashion portrait", "category": "editorial" },
+  { "id": "g13", "src": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80", "alt": "Shopping Milan", "category": "editorial" },
+  { "id": "g14", "src": "https://images.unsplash.com/photo-1589465885857-44edb59bbff2?w=800&q=80", "alt": "Fashion details", "category": "editorial" },
+  { "id": "g15", "src": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80", "alt": "Model backstage", "category": "events" }
+]

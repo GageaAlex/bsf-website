@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "slug": "the-quiet-luxury-paradox",
+    "title": "The Quiet Luxury Paradox",
+    "subtitle": "Why the ultra-rich are dressing down — and what it means for fashion",
+    "rubric": "culture",
+    "author": {
+      "name": "Alessia Fontana",
+      "role": "Culture Editor",
+      "bio": "Alessia studies Economics & Management at Bocconi and writes about the intersection of fashion, culture, and society.",
+      "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80",
+    "date": "2024-03-15",
+    "readingTime": 6,
+    "layout": "template-1",
+    "excerpt": "Old money aesthetics have taken over social media — but is quiet luxury a genuine shift or just another trend dressed up in cashmere?",
+    "content": "The most expensive thing you can wear today might be nothing at all. No logos, no hardware, no visible markers of status. Just impeccably cut fabric in muted earth tones. This is quiet luxury — and it has colonised both the wardrobes of the ultra-wealthy and the aspirational feeds of millions.",
+    "published": true
+  },
+  {
+    "id": "2",
+    "slug": "mfw-ss25-business-of-shows",
+    "title": "MFW SS25: The Business of the Show",
+    "subtitle": "Behind the front row — how fashion weeks generate billions",
+    "rubric": "business",
+    "author": {
+      "name": "Marco Bellini",
+      "role": "Business Editor",
+      "bio": "Marco is a Finance student at Bocconi with a deep interest in luxury conglomerates and brand economics.",
+      "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
+    "date": "2024-02-28",
+    "readingTime": 8,
+    "layout": "template-2",
+    "excerpt": "Fashion Week generates over $1 billion in economic activity for Milan alone. We break down exactly where the money flows.",
+    "content": "When the lights go down and the models step onto the runway, very few people in that room are thinking about clothes. The buyers are thinking about orders. The journalists are thinking about copy. The brands are thinking about reach. And the city of Milan is counting euros.",
+    "published": true
+  },
+  {
+    "id": "3",
+    "slug": "interview-lucia-pica",
+    "title": "Creative Direction in the Age of Virality",
+    "subtitle": "An interview with a leading creative director on navigating social media without losing your soul",
+    "rubric": "industry-interviews",
+    "author": {
+      "name": "Sofia Marchetti",
+      "role": "Interviews Editor",
+      "bio": "Sofia is a Communications student who interviews leading figures in the fashion and creative industries.",
+      "photo": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=1200&q=80",
+    "date": "2024-01-20",
+    "readingTime": 10,
+    "layout": "template-3",
+    "excerpt": "We sat down with a seasoned creative director to talk about the tension between brand integrity and the relentless demand for content.",
+    "content": "There is a version of this interview that starts with her bio — the campaigns, the houses, the accolades. But she asked us not to open that way. 'Everyone knows the CV,' she said. 'Let's talk about the work.'",
+    "published": true
+  },
+  {
+    "id": "4",
+    "slug": "made-in-italy-bocconi-brands",
+    "title": "Made in Italy, Studied in Milan",
+    "subtitle": "Bocconi alumni who built fashion brands from scratch",
+    "rubric": "bocco-brands",
+    "author": {
+      "name": "Chiara Russo",
+      "role": "Bocco Brands Editor",
+      "bio": "Chiara tracks entrepreneurship in fashion among the Bocconi alumni network.",
+      "photo": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80",
+    "date": "2024-03-01",
+    "readingTime": 7,
+    "layout": "template-1",
+    "excerpt": "From a dorm room concept to a six-figure DTC brand — meet the Bocconi students rewriting the rules of fashion entrepreneurship.",
+    "content": "The library closes at midnight. By 12:05, three students are still at a table in the corner, laptops open, arguing about a logo. They are not studying for an exam. They are building a brand.",
+    "published": true
+  },
+  {
+    "id": "5",
+    "slug": "fast-fashion-guilt-opinion",
+    "title": "Stop Pretending Fast Fashion Is Anyone's Personal Failing",
+    "subtitle": "The real problem isn't your Zara haul",
+    "rubric": "opinions",
+    "author": {
+      "name": "Valentina Greco",
+      "role": "Opinions Editor",
+      "bio": "Valentina writes opinion pieces on fashion, sustainability, and the systems that shape how we dress.",
+      "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1558171813-c9d35ae66095?w=1200&q=80",
+    "date": "2024-02-10",
+    "readingTime": 5,
+    "layout": "template-2",
+    "excerpt": "The sustainability discourse in fashion loves to blame the consumer. But when affordable clothing is often the only option, whose fault is it really?",
+    "content": "Every few months, a new infographic goes viral. It shows the number of litres of water used to make a single pair of jeans, or the microplastics shed by a synthetic top. The implicit message is always the same: you are doing this. Stop.",
+    "published": true
+  },
+  {
+    "id": "6",
+    "slug": "pfw-backstage-access",
+    "title": "Behind the Curtain at Paris Fashion Week",
+    "subtitle": "What actually happens in the 48 hours before a major show",
+    "rubric": "culture",
+    "author": {
+      "name": "Alessia Fontana",
+      "role": "Culture Editor",
+      "bio": "Alessia studies Economics & Management at Bocconi and writes about the intersection of fashion, culture, and society.",
+      "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80"
+    },
+    "coverImage": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1200&q=80",
+    "date": "2024-03-20",
+    "readingTime": 9,
+    "layout": "template-3",
+    "excerpt": "We followed a production team through the final 48 hours of show prep. The chaos, the precision, and the strange calm that descends at the last moment.",
+    "content": "The venue has been empty for three days. Now it is full — full of scaffolding and staple guns, of crates stacked floor-to-ceiling, of people moving very fast and talking in four languages simultaneously.",
+    "published": true
+  }
+]
