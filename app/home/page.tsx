@@ -25,7 +25,7 @@ const sections = [
     id: "events",
     label: "Events",
     href: "/events",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85",
+    image: "https://images.unsplash.com/photo-1645211710746-9629755e6814?w=1600&q=85",
     description: "Fashion weeks, panels, aperitivi, and everything in between.",
   },
   {

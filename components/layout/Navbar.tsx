@@ -17,7 +17,6 @@ const navLinks = [
     ],
   },
   { label: "Editorials", href: "/editorials" },
-  { label: "Member Articles", href: "/articles" },
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Join Our Team", href: "/join" },

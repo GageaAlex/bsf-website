@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // Hardcoded password — replace with environment variable in production
 const ADMIN_PASSWORD = "bs4f2024";
 
-type Tab = "articles" | "events" | "members" | "alumni" | "settings";
+type Tab = "members" | "alumni" | "settings";
 
 function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
   const [value, setValue] = useState("");
@@ -72,12 +72,10 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
 }
 
 function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState<Tab>("articles");
+  const [activeTab, setActiveTab] = useState<Tab>("members");
   const [saved, setSaved] = useState(false);
 
   const tabs: { id: Tab; label: string }[] = [
-    { id: "articles", label: "Articles" },
-    { id: "events", label: "Events" },
     { id: "members", label: "Members" },
     { id: "alumni", label: "Alumni" },
     { id: "settings", label: "Settings" },
@@ -137,8 +135,6 @@ function AdminDashboard() {
         </header>
 
         <div className="p-8">
-          {activeTab === "articles" && <ArticlesTab onSave={showSaved} />}
-          {activeTab === "events" && <EventsTab onSave={showSaved} />}
           {activeTab === "members" && <MembersTab onSave={showSaved} />}
           {activeTab === "alumni" && <AlumniTab onSave={showSaved} />}
           {activeTab === "settings" && <SettingsTab onSave={showSaved} />}
@@ -184,79 +180,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     <div className="mb-10">
       <h2 className="font-serif text-2xl text-ivory mb-6">{title}</h2>
       <div className="bg-charcoal border border-white/8 p-6 space-y-4">{children}</div>
-    </div>
-  );
-}
-
-function ArticlesTab({ onSave }: { onSave: () => void }) {
-  const [title, setTitle] = useState("");
-  const [rubric, setRubric] = useState("culture");
-  const [author, setAuthor] = useState("");
-  const [excerpt, setExcerpt] = useState("");
-  const [coverUrl, setCoverUrl] = useState("");
-  const [publishDate, setPublishDate] = useState("");
-
-  return (
-    <div>
-      <Section title="New Article">
-        <FormField label="Title" value={title} onChange={setTitle} placeholder="Article title" />
-        <div>
-          <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-1.5">Rubric</label>
-          <select
-            value={rubric}
-            onChange={(e) => setRubric(e.target.value)}
-            className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
-          >
-            <option value="culture">Culture</option>
-            <option value="business">Business</option>
-            <option value="industry-interviews">Industry Interviews</option>
-            <option value="bocco-brands">Bocco Brands</option>
-            <option value="opinions">Opinions</option>
-          </select>
-        </div>
-        <FormField label="Author Name" value={author} onChange={setAuthor} placeholder="Author name" />
-        <FormField label="Excerpt" type="textarea" value={excerpt} onChange={setExcerpt} placeholder="Short excerpt..." />
-        <FormField label="Cover Image URL" value={coverUrl} onChange={setCoverUrl} placeholder="https://..." />
-        <FormField label="Publish Date" type="date" value={publishDate} onChange={setPublishDate} />
-        <div className="pt-2">
-          <button onClick={onSave} className="bg-ember hover:bg-ember-light text-ivory px-6 py-3 text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300">
-            Save Article
-          </button>
-        </div>
-      </Section>
-
-      <div className="bg-charcoal/50 border border-white/5 p-6">
-        <p className="text-sm text-muted font-sans">
-          Articles are stored in <code className="text-ivory/70 text-xs">/data/articles.json</code>. To publish, add your article object to the array and set <code className="text-ivory/70 text-xs">&quot;published&quot;: true</code>.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function EventsTab({ onSave }: { onSave: () => void }) {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [posterUrl, setPosterUrl] = useState("");
-  const [signupLink, setSignupLink] = useState("");
-
-  return (
-    <div>
-      <Section title="New Upcoming Event">
-        <FormField label="Title" value={title} onChange={setTitle} placeholder="Event title" />
-        <FormField label="Date" type="date" value={date} onChange={setDate} />
-        <FormField label="Location" value={location} onChange={setLocation} placeholder="Venue, City" />
-        <FormField label="Description" type="textarea" value={description} onChange={setDescription} placeholder="Event description..." />
-        <FormField label="Poster URL" value={posterUrl} onChange={setPosterUrl} placeholder="https://..." />
-        <FormField label="Sign-up Link" value={signupLink} onChange={setSignupLink} placeholder="https://forms..." />
-        <div className="pt-2">
-          <button onClick={onSave} className="bg-ember hover:bg-ember-light text-ivory px-6 py-3 text-xs tracking-[0.2em] uppercase font-sans transition-colors">
-            Save Event
-          </button>
-        </div>
-      </Section>
     </div>
   );
 }
@@ -343,9 +266,8 @@ function SettingsTab({ onSave }: { onSave: () => void }) {
 
       <div className="bg-charcoal/50 border border-white/5 p-6">
         <p className="text-sm text-muted font-sans leading-relaxed">
-          <strong className="text-ivory/80">Note:</strong> This admin panel is a mock CMS interface.
-          To actually persist changes, connect these forms to a backend API or replace the JSON files in <code className="text-ivory/70 text-xs">/data/</code>.
-          For a production CMS, consider Sanity or Contentful — the data structure is already compatible.
+          <strong className="text-ivory/80">Note:</strong> Editorials and Events are no longer managed here — members publish their own articles and events from <code className="text-ivory/70 text-xs">/dashboard</code>, backed by Supabase. This panel is a mock CMS interface for Members and Alumni only.
+          To actually persist those changes, connect these forms to a backend API or replace the JSON files in <code className="text-ivory/70 text-xs">/data/</code>.
         </p>
       </div>
     </div>

@@ -1,102 +1,59 @@
-"use client";
-
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import eventsData from "@/data/events.json";
+import EventsMapLoader from "@/components/events/EventsMapLoader";
+import { createClient } from "@/lib/supabase/server";
 import { formatDate } from "@/lib/utils";
+import type { MemberEvent } from "@/types/member-event";
 
-type PastEvent = {
-  id: string;
-  title: string;
-  date: string;
-  year: string;
-  location: string;
-  description: string;
-  coverImage: string;
-  photos: string[];
-  speakers: string[];
-  organizer: string;
-};
+export const revalidate = 0;
 
-function PhotoCarousel({ photos }: { photos: string[] }) {
-  const [active, setActive] = useState(0);
+export default async function EventPage({ params }: { params: { slug: string } }) {
+  const supabase = createClient();
+  const { data: event } = await supabase
+    .from("events")
+    .select("*")
+    .eq("slug", params.slug)
+    .eq("status", "published")
+    .single();
 
-  return (
-    <div className="relative">
-      <div className="relative aspect-video overflow-hidden bg-charcoal">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute inset-0"
-          >
-            <Image src={photos[active]} alt={`Photo ${active + 1}`} fill className="object-cover" sizes="100vw" />
-          </motion.div>
-        </AnimatePresence>
-
-        {photos.length > 1 && (
-          <>
-            <button onClick={() => setActive((active - 1 + photos.length) % photos.length)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-obsidian/60 hover:bg-obsidian/90 flex items-center justify-center text-ivory transition-colors">
-              ←
-            </button>
-            <button onClick={() => setActive((active + 1) % photos.length)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-obsidian/60 hover:bg-obsidian/90 flex items-center justify-center text-ivory transition-colors">
-              →
-            </button>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {photos.map((_, i) => (
-                <button key={i} onClick={() => setActive(i)}
-                  className={`w-2 h-2 rounded-full transition-colors ${i === active ? "bg-ivory" : "bg-ivory/30"}`} />
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default function EventPage({ params }: { params: { slug: string } }) {
-  const event = (eventsData.past as PastEvent[]).find((e) => e.id === params.slug);
   if (!event) notFound();
+
+  const typedEvent = event as MemberEvent;
+  const metaItems = [
+    { label: "Date", value: formatDate(typedEvent.event_date) },
+    ...(typedEvent.event_time ? [{ label: "Time", value: typedEvent.event_time }] : []),
+    ...(typedEvent.location ? [{ label: "Location", value: typedEvent.location }] : []),
+    ...(typedEvent.price ? [{ label: "Price", value: typedEvent.price }] : []),
+    ...(typedEvent.dress_code ? [{ label: "Dress Code", value: typedEvent.dress_code }] : []),
+    { label: "Organizer", value: typedEvent.author_name },
+  ];
 
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[400px] overflow-hidden pt-20">
-        <Image src={event.coverImage} alt={event.title} fill className="object-cover" sizes="100vw" priority />
+      <section className="relative h-[60vh] min-h-[400px] overflow-hidden pt-20 bg-charcoal">
+        {typedEvent.cover_image && (
+          <Image src={typedEvent.cover_image} alt={typedEvent.title} fill className="object-cover" sizes="100vw" priority />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent" />
         <div className="absolute inset-0 flex items-end pb-16 px-6">
           <div className="max-w-5xl mx-auto w-full">
             <Link href="/events" className="text-2xs text-muted hover:text-ivory tracking-editorial uppercase font-sans mb-6 inline-flex items-center gap-2 transition-colors">
               ← Events
             </Link>
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="font-display text-[clamp(2.5rem,6vw,5rem)] text-ivory leading-tight mt-4">
-              {event.title}
-            </motion.h1>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-ivory leading-tight mt-4">
+              {typedEvent.title}
+            </h1>
           </div>
         </div>
       </section>
 
       {/* Meta */}
       <section className="bg-obsidian py-16 px-6 border-b border-white/8">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { label: "Date", value: formatDate(event.date) },
-            { label: "Location", value: event.location },
-            { label: "Organizer", value: event.organizer },
-            { label: "Speakers", value: event.speakers.length > 0 ? event.speakers[0] : "—" },
-          ].map((item) => (
+        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8">
+          {metaItems.map((item) => (
             <div key={item.label}>
               <p className="text-2xs text-muted tracking-editorial uppercase font-sans mb-1">{item.label}</p>
               <p className="text-sm text-ivory font-sans">{item.value}</p>
@@ -105,38 +62,45 @@ export default function EventPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      {/* Description */}
+      {/* Description + register CTA */}
       <section className="bg-obsidian py-16 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimatedSection>
-            <p className="font-serif text-2xl text-ivory/80 leading-relaxed mb-8">{event.description}</p>
-          </AnimatedSection>
-
-          {event.speakers.length > 0 && (
-            <AnimatedSection delay={0.1}>
-              <div className="mt-10">
-                <p className="text-2xs text-muted tracking-[0.3em] uppercase font-sans mb-4">Speakers</p>
-                <ul className="space-y-2">
-                  {event.speakers.map((s, i) => (
-                    <li key={i} className="flex items-center gap-3 text-ivory/70 text-sm font-sans">
-                      <span className="w-1.5 h-1.5 bg-ember rounded-full" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
+            {typedEvent.description && (
+              <p className="font-serif text-2xl text-ivory/80 leading-relaxed mb-10 whitespace-pre-line">
+                {typedEvent.description}
+              </p>
+            )}
+            {typedEvent.how_to_register && (
+              <div>
+                {/^https?:\/\//.test(typedEvent.how_to_register) ? (
+                  <a
+                    href={typedEvent.how_to_register}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase font-sans text-ivory bg-ember hover:bg-ember-light px-6 py-3.5 transition-colors duration-300"
+                  >
+                    Sign Up →
+                  </a>
+                ) : (
+                  <div className="border border-white/10 bg-charcoal p-5">
+                    <p className="text-2xs text-muted tracking-editorial uppercase font-sans mb-2">How to Register</p>
+                    <p className="text-sm text-ivory/80 font-sans leading-relaxed">{typedEvent.how_to_register}</p>
+                  </div>
+                )}
               </div>
-            </AnimatedSection>
-          )}
+            )}
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* Photo carousel */}
-      {event.photos.length > 0 && (
+      {/* Map */}
+      {typedEvent.map_lat !== null && typedEvent.map_lng !== null && (
         <section className="bg-charcoal py-16 px-6 border-t border-white/8">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <AnimatedSection>
-              <p className="text-2xs text-muted tracking-[0.3em] uppercase font-sans mb-8">Photos</p>
-              <PhotoCarousel photos={event.photos} />
+              <p className="text-2xs text-muted tracking-[0.3em] uppercase font-sans mb-8 text-center">Location</p>
+              <EventsMapLoader events={[typedEvent]} />
             </AnimatedSection>
           </div>
         </section>

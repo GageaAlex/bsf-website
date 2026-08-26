@@ -9,7 +9,6 @@ const socials = [
 const links = [
   { label: "About", href: "/about/story" },
   { label: "Editorials", href: "/editorials" },
-  { label: "Member Articles", href: "/articles" },
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Join Our Team", href: "/join" },
@@ -70,7 +69,7 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-white/5">
           <p className="text-2xs text-faint tracking-editorial uppercase">
-            &copy; {new Date().getFullYear()} BS4F — Bocconi Students for Fashion
+            Bocconi Students for Fashion
           </p>
           <p className="text-2xs text-faint tracking-editorial uppercase">
             Milan, Italy

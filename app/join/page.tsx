@@ -15,13 +15,13 @@ const steps = [
     code: "APR",
     title: "Aperitivo",
     subtitle: "Meet the Team",
-    description: "Shortlisted applicants are invited to an informal aperitivo with current members. No pressure — just a chance to see if the fit is right.",
+    description: "An open aperitivo with the BS4F team is set for interested applicants to meet the team and ask questions before sending in their application.",
   },
   {
     code: "APP",
     title: "Application",
     subtitle: "Written Form",
-    description: "A short written application asking about your interests, which team you'd like to join, and what you'd bring to BS4F.",
+    description: "A written application asking for a letter of motivation, CV, and which team you'd like to join has to be submitted by the interested student.",
   },
   {
     code: "INT",

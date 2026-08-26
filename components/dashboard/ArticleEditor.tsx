@@ -10,7 +10,7 @@ import TiptapImage from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import { createClient } from "@/lib/supabase/client";
 import { slugify } from "@/lib/utils";
-import type { MemberArticle } from "@/types/member-article";
+import { RUBRICS, type MemberArticle, type Rubric } from "@/types/member-article";
 
 async function uploadArticleImage(
   supabase: ReturnType<typeof createClient>,
@@ -121,6 +121,12 @@ export default function ArticleEditor({
 }) {
   const router = useRouter();
   const [title, setTitle] = useState(article?.title || "");
+  const [rubric, setRubric] = useState<Rubric>(article?.rubric || RUBRICS[0].id);
+  const [publishDate, setPublishDate] = useState(
+    article?.published_at
+      ? article.published_at.slice(0, 10)
+      : new Date().toISOString().slice(0, 10)
+  );
   const [coverImage, setCoverImage] = useState<string | null>(article?.cover_image || null);
   const [saving, setSaving] = useState<"draft" | "publish" | null>(null);
   const [uploadingCover, setUploadingCover] = useState(false);
@@ -182,12 +188,19 @@ export default function ArticleEditor({
       return;
     }
 
+    if (status === "published" && !publishDate) {
+      setError("Please choose a publish date.");
+      return;
+    }
+
     setSaving(status === "draft" ? "draft" : "publish");
     setError(null);
 
     const supabase = createClient();
     const content = editor.getHTML();
-    const now = new Date().toISOString();
+    // Anchor at UTC noon (not midnight) so the chosen calendar date can't roll
+    // to the previous/next day when read back in a different timezone.
+    const publishedAtIso = new Date(`${publishDate}T12:00:00Z`).toISOString();
 
     try {
       if (mode === "new") {
@@ -199,34 +212,35 @@ export default function ArticleEditor({
             author_name: authorName,
             title: title.trim(),
             slug,
+            rubric,
             content,
             cover_image: coverImage,
             status,
-            published_at: status === "published" ? now : null,
+            published_at: status === "published" ? publishedAtIso : null,
           })
           .select()
           .single();
 
         if (insertError) throw insertError;
 
-        router.push(status === "published" ? `/articles/${data.slug}` : "/dashboard");
+        router.push(status === "published" ? `/editorials/${rubric}/${data.slug}` : "/dashboard");
         router.refresh();
       } else if (article) {
-        const shouldSetPublishedAt = status === "published" && !article.published_at;
         const { error: updateError } = await supabase
           .from("articles")
           .update({
             title: title.trim(),
+            rubric,
             content,
             cover_image: coverImage,
             status,
-            ...(shouldSetPublishedAt ? { published_at: now } : {}),
+            ...(status === "published" ? { published_at: publishedAtIso } : {}),
           })
           .eq("id", article.id);
 
         if (updateError) throw updateError;
 
-        router.push(status === "published" ? `/articles/${article.slug}` : "/dashboard");
+        router.push(status === "published" ? `/editorials/${rubric}/${article.slug}` : "/dashboard");
         router.refresh();
       }
     } catch (err) {
@@ -311,6 +325,37 @@ export default function ArticleEditor({
               {uploadingCover ? "Uploading…" : "Add Cover Image (optional)"}
             </button>
           )}
+        </div>
+
+        {/* Rubric + Publish Date */}
+        <div className="mb-6 flex flex-wrap gap-6">
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Rubric
+            </label>
+            <select
+              value={rubric}
+              onChange={(e) => setRubric(e.target.value as Rubric)}
+              className="bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            >
+              {RUBRICS.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Publish Date
+            </label>
+            <input
+              type="date"
+              value={publishDate}
+              onChange={(e) => setPublishDate(e.target.value)}
+              className="bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
         </div>
 
         {/* Title */}

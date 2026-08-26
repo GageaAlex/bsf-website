@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { MemberArticle } from "@/types/member-article";
+import type { MemberEvent } from "@/types/member-event";
 import DashboardClient from "./DashboardClient";
 
 export default async function DashboardPage() {
@@ -13,11 +14,18 @@ export default async function DashboardPage() {
     redirect("/login?redirect=/dashboard");
   }
 
-  const { data: articles } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("author_id", user.id)
-    .order("updated_at", { ascending: false });
+  const [{ data: articles }, { data: events }] = await Promise.all([
+    supabase
+      .from("articles")
+      .select("*")
+      .eq("author_id", user.id)
+      .order("updated_at", { ascending: false }),
+    supabase
+      .from("events")
+      .select("*")
+      .eq("author_id", user.id)
+      .order("updated_at", { ascending: false }),
+  ]);
 
   const displayName =
     (user.user_metadata?.full_name as string | undefined) || user.email || "Member";
@@ -25,6 +33,7 @@ export default async function DashboardPage() {
   return (
     <DashboardClient
       articles={(articles as MemberArticle[]) || []}
+      events={(events as MemberEvent[]) || []}
       displayName={displayName}
     />
   );

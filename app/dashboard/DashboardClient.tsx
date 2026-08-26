@@ -7,8 +7,9 @@ import { motion } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 import { formatDate } from "@/lib/utils";
 import type { MemberArticle } from "@/types/member-article";
+import type { MemberEvent } from "@/types/member-event";
 
-function StatusBadge({ status }: { status: MemberArticle["status"] }) {
+function StatusBadge({ status }: { status: "draft" | "published" }) {
   return (
     <span
       className={`text-2xs tracking-editorial uppercase font-sans px-2.5 py-1 border ${
@@ -24,14 +25,17 @@ function StatusBadge({ status }: { status: MemberArticle["status"] }) {
 
 export default function DashboardClient({
   articles,
+  events,
   displayName,
 }: {
   articles: MemberArticle[];
+  events: MemberEvent[];
   displayName: string;
 }) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
-  const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
+  const [deletingArticleIds, setDeletingArticleIds] = useState<Set<string>>(new Set());
+  const [deletingEventIds, setDeletingEventIds] = useState<Set<string>>(new Set());
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const handleLogout = async () => {
@@ -42,21 +46,21 @@ export default function DashboardClient({
     router.refresh();
   };
 
-  const handleDelete = async (article: MemberArticle) => {
+  const handleDeleteArticle = async (article: MemberArticle) => {
     const confirmed = window.confirm(
       `Delete "${article.title || "Untitled"}"? This cannot be undone.`
     );
     if (!confirmed) return;
 
     setDeleteError(null);
-    setDeletingIds((prev) => new Set(prev).add(article.id));
+    setDeletingArticleIds((prev) => new Set(prev).add(article.id));
 
     const supabase = createClient();
     const { error } = await supabase.from("articles").delete().eq("id", article.id);
 
     if (error) {
       setDeleteError(error.message);
-      setDeletingIds((prev) => {
+      setDeletingArticleIds((prev) => {
         const next = new Set(prev);
         next.delete(article.id);
         return next;
@@ -67,7 +71,33 @@ export default function DashboardClient({
     router.refresh();
   };
 
-  const visibleArticles = articles.filter((a) => !deletingIds.has(a.id));
+  const handleDeleteEvent = async (event: MemberEvent) => {
+    const confirmed = window.confirm(
+      `Delete "${event.title || "Untitled"}"? This cannot be undone.`
+    );
+    if (!confirmed) return;
+
+    setDeleteError(null);
+    setDeletingEventIds((prev) => new Set(prev).add(event.id));
+
+    const supabase = createClient();
+    const { error } = await supabase.from("events").delete().eq("id", event.id);
+
+    if (error) {
+      setDeleteError(error.message);
+      setDeletingEventIds((prev) => {
+        const next = new Set(prev);
+        next.delete(event.id);
+        return next;
+      });
+      return;
+    }
+
+    router.refresh();
+  };
+
+  const visibleArticles = articles.filter((a) => !deletingArticleIds.has(a.id));
+  const visibleEvents = events.filter((e) => !deletingEventIds.has(e.id));
 
   return (
     <div className="min-h-screen bg-obsidian px-6 py-14">
@@ -79,12 +109,18 @@ export default function DashboardClient({
             </p>
             <h1 className="font-display text-4xl text-ivory">{displayName}</h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <Link
               href="/dashboard/new"
               className="bg-ember hover:bg-ember-light text-ivory px-5 py-3 text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300"
             >
               Publish New Article
+            </Link>
+            <Link
+              href="/dashboard/new-event"
+              className="border border-ember text-ember hover:bg-ember hover:text-ivory px-5 py-3 text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300"
+            >
+              Publish New Event
             </Link>
             <button
               onClick={handleLogout}
@@ -102,12 +138,12 @@ export default function DashboardClient({
           </div>
         )}
 
-        <div className="border-t border-white/8">
+        {/* Articles */}
+        <p className="text-2xs text-muted tracking-[0.25em] uppercase font-sans mb-2">Articles</p>
+        <div className="border-t border-white/8 mb-14">
           {visibleArticles.length === 0 ? (
-            <div className="py-16 text-center">
-              <p className="text-muted font-sans text-sm">
-                You haven&apos;t written any articles yet.
-              </p>
+            <div className="py-10 text-center">
+              <p className="text-muted font-sans text-sm">You haven&apos;t written any articles yet.</p>
               <Link
                 href="/dashboard/new"
                 className="inline-block mt-4 text-2xs text-ember tracking-editorial uppercase font-sans hover:text-ember-light transition-colors"
@@ -138,7 +174,7 @@ export default function DashboardClient({
                 <div className="flex items-center gap-4 shrink-0">
                   {article.status === "published" && (
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={`/editorials/${article.rubric}/${article.slug}`}
                       className="text-2xs text-muted hover:text-ivory tracking-editorial uppercase font-sans transition-colors"
                     >
                       View
@@ -151,11 +187,72 @@ export default function DashboardClient({
                     Edit
                   </Link>
                   <button
-                    onClick={() => handleDelete(article)}
-                    disabled={deletingIds.has(article.id)}
+                    onClick={() => handleDeleteArticle(article)}
+                    disabled={deletingArticleIds.has(article.id)}
                     className="text-2xs text-muted hover:text-ember tracking-editorial uppercase font-sans transition-colors border border-white/15 hover:border-ember/50 px-4 py-2 disabled:opacity-50"
                   >
-                    {deletingIds.has(article.id) ? "Deleting…" : "Delete"}
+                    {deletingArticleIds.has(article.id) ? "Deleting…" : "Delete"}
+                  </button>
+                </div>
+              </motion.div>
+            ))
+          )}
+        </div>
+
+        {/* Events */}
+        <p className="text-2xs text-muted tracking-[0.25em] uppercase font-sans mb-2">Events</p>
+        <div className="border-t border-white/8">
+          {visibleEvents.length === 0 ? (
+            <div className="py-10 text-center">
+              <p className="text-muted font-sans text-sm">You haven&apos;t published any events yet.</p>
+              <Link
+                href="/dashboard/new-event"
+                className="inline-block mt-4 text-2xs text-ember tracking-editorial uppercase font-sans hover:text-ember-light transition-colors"
+              >
+                Publish your first event →
+              </Link>
+            </div>
+          ) : (
+            visibleEvents.map((event, i) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04 }}
+                className="flex items-center justify-between gap-6 py-6 border-b border-white/8 flex-wrap"
+              >
+                <div className="min-w-0">
+                  <p className="font-serif text-xl text-ivory truncate mb-1.5">
+                    {event.title || "Untitled"}
+                  </p>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <StatusBadge status={event.status} />
+                    <span className="text-2xs text-muted font-sans">
+                      {formatDate(event.event_date)}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 shrink-0">
+                  {event.status === "published" && (
+                    <Link
+                      href={`/events/${event.slug}`}
+                      className="text-2xs text-muted hover:text-ivory tracking-editorial uppercase font-sans transition-colors"
+                    >
+                      View
+                    </Link>
+                  )}
+                  <Link
+                    href={`/dashboard/edit-event/${event.id}`}
+                    className="text-2xs text-ivory hover:text-ember tracking-editorial uppercase font-sans transition-colors border border-white/15 hover:border-ember/50 px-4 py-2"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteEvent(event)}
+                    disabled={deletingEventIds.has(event.id)}
+                    className="text-2xs text-muted hover:text-ember tracking-editorial uppercase font-sans transition-colors border border-white/15 hover:border-ember/50 px-4 py-2 disabled:opacity-50"
+                  >
+                    {deletingEventIds.has(event.id) ? "Deleting…" : "Delete"}
                   </button>
                 </div>
               </motion.div>

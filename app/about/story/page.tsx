@@ -2,12 +2,19 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const socials = [
   { label: "Instagram", href: "https://instagram.com/bs4f_bocconi", icon: "IG" },
   { label: "LinkedIn", href: "https://linkedin.com/company/bs4f", icon: "IN" },
   { label: "TikTok", href: "https://tiktok.com/@bs4f", icon: "TT" },
+];
+
+const aboutPages = [
+  { label: "Board & Members", href: "/about/board" },
+  { label: "Alumni", href: "/about/alumni" },
+  { label: "For Professionals", href: "/about/professionals" },
 ];
 
 export default function StoryPage() {
@@ -106,8 +113,31 @@ export default function StoryPage() {
         </div>
       </section>
 
+      {/* Explore more about us */}
+      <section className="bg-charcoal border-t border-white/8 py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <AnimatedSection>
+            <p className="text-2xs text-muted tracking-[0.3em] uppercase font-sans mb-8">
+              Explore More
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {aboutPages.map((page) => (
+                <Link
+                  key={page.href}
+                  href={page.href}
+                  className="group flex items-center gap-4 border border-white/15 hover:border-ember px-8 py-5 transition-colors duration-300"
+                >
+                  <span className="font-serif text-xl text-ivory">{page.label}</span>
+                  <span className="text-ember opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
+                </Link>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Social links */}
-      <section className="bg-charcoal border-t border-white/8 py-16 px-6">
+      <section className="bg-obsidian border-t border-white/8 py-16 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimatedSection>
             <p className="text-2xs text-muted tracking-[0.3em] uppercase font-sans mb-8">
