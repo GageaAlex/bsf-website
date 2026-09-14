@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ArticleEditor from "@/components/dashboard/ArticleEditor";
 import type { MemberArticle } from "@/types/member-article";
+
+export const metadata: Metadata = { title: "Edit Article — BS4F", robots: { index: false } };
 
 export default async function EditArticlePage({ params }: { params: { id: string } }) {
   const supabase = createClient();

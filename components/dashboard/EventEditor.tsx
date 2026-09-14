@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { slugify } from "@/lib/utils";
-import type { MemberEvent } from "@/types/member-event";
+import { EVENT_CATEGORIES, type EventCategory, type MemberEvent } from "@/types/member-event";
 
 const MapPinPicker = dynamic(() => import("@/components/events/MapPinPicker"), {
   ssr: false,
@@ -76,14 +76,21 @@ export default function EventEditor({
 }) {
   const router = useRouter();
   const [title, setTitle] = useState(event?.title || "");
+  const [category, setCategory] = useState<EventCategory>(event?.category || "bs4f");
+  const [eventType, setEventType] = useState(event?.event_type || "");
+  const [organizer, setOrganizer] = useState(event?.organizer || "");
   const [coverImage, setCoverImage] = useState<string | null>(event?.cover_image || null);
+  const [videoUrl, setVideoUrl] = useState(event?.video_url || "");
   const [description, setDescription] = useState(event?.description || "");
+  const [fullDescription, setFullDescription] = useState(event?.full_description || "");
   const [price, setPrice] = useState(event?.price || "");
   const [dressCode, setDressCode] = useState(event?.dress_code || "");
   const [howToRegister, setHowToRegister] = useState(event?.how_to_register || "");
+  const [externalUrl, setExternalUrl] = useState(event?.external_url || "");
   const [eventDate, setEventDate] = useState(event?.event_date || new Date().toISOString().slice(0, 10));
   const [eventTime, setEventTime] = useState(event?.event_time || "");
   const [location, setLocation] = useState(event?.location || "");
+  const [address, setAddress] = useState(event?.address || "");
   const [mapLat, setMapLat] = useState<number | null>(event?.map_lat ?? null);
   const [mapLng, setMapLng] = useState<number | null>(event?.map_lng ?? null);
 
@@ -125,14 +132,21 @@ export default function EventEditor({
 
     const payload = {
       title: title.trim(),
+      category,
+      event_type: eventType.trim() || null,
+      organizer: organizer.trim() || null,
       description: description.trim(),
+      full_description: fullDescription.trim() || null,
       price: price.trim() || null,
       dress_code: dressCode.trim() || null,
       how_to_register: howToRegister.trim() || null,
+      external_url: externalUrl.trim() || null,
       event_date: eventDate,
       event_time: eventTime.trim() || null,
       location: location.trim() || null,
+      address: address.trim() || null,
       cover_image: coverImage,
+      video_url: videoUrl.trim() || null,
       map_lat: mapLat,
       map_lng: mapLng,
       status,
@@ -221,6 +235,28 @@ export default function EventEditor({
         )}
 
         <div className="space-y-6">
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Category
+            </label>
+            <div className="flex flex-wrap gap-3">
+              {EVENT_CATEGORIES.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setCategory(c.id)}
+                  aria-pressed={category === c.id}
+                  className={`px-4 py-2.5 text-xs font-sans border transition-colors duration-200 ${
+                    category === c.id
+                      ? "border-ember text-ivory bg-ember/10"
+                      : "border-white/10 text-muted hover:text-ivory hover:border-white/30"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          </div>
           {/* Cover image */}
           <div>
             <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
@@ -268,15 +304,33 @@ export default function EventEditor({
 
           <Field label="Title" value={title} onChange={setTitle} placeholder="Event title" required />
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Field label="Event Type" value={eventType} onChange={setEventType} placeholder="e.g. Dinner, Panel, Fashion Show" />
+            <Field label="Organizer" value={organizer} onChange={setOrganizer} placeholder="e.g. BS4F Events Team" />
+          </div>
+
           <div>
             <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
-              Description
+              Short Description
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              rows={5}
-              placeholder="A few lines about the event..."
+              rows={3}
+              placeholder="A few lines about the event, shown on cards and previews..."
+              className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors resize-none"
+            />
+          </div>
+
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Full Description (optional)
+            </label>
+            <textarea
+              value={fullDescription}
+              onChange={(e) => setFullDescription(e.target.value)}
+              rows={6}
+              placeholder="The full write-up shown on the event's own page..."
               className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors resize-none"
             />
           </div>
@@ -285,15 +339,28 @@ export default function EventEditor({
             <Field label="Date" type="date" value={eventDate} onChange={setEventDate} required />
             <Field label="Time" value={eventTime} onChange={setEventTime} placeholder="e.g. 20:00 or All day" />
             <Field label="Location" value={location} onChange={setLocation} placeholder="Venue, area" />
+            <Field label="Address" value={address} onChange={setAddress} placeholder="Street address (optional)" />
             <Field label="Price" value={price} onChange={setPrice} placeholder="Free / €15 / ..." />
+            <Field label="Dress Code" value={dressCode} onChange={setDressCode} placeholder="e.g. Smart casual" />
           </div>
 
-          <Field label="Dress Code" value={dressCode} onChange={setDressCode} placeholder="e.g. Smart casual" />
           <Field
             label="How to Register"
             value={howToRegister}
             onChange={setHowToRegister}
-            placeholder="Sign-up link or instructions"
+            placeholder="Sign-up instructions"
+          />
+          <Field
+            label="External Booking / Info URL (optional)"
+            value={externalUrl}
+            onChange={setExternalUrl}
+            placeholder="https://..."
+          />
+          <Field
+            label="Background Video URL (optional)"
+            value={videoUrl}
+            onChange={setVideoUrl}
+            placeholder="https://... (.mp4)"
           />
 
           <div>

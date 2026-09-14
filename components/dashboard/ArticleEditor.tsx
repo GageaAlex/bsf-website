@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,15 @@ import TiptapImage from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import { createClient } from "@/lib/supabase/client";
 import { slugify } from "@/lib/utils";
-import { RUBRICS, type MemberArticle, type Rubric } from "@/types/member-article";
+import {
+  RUBRICS,
+  SERIES,
+  TEMPLATES,
+  type ArticleTemplate,
+  type MemberArticle,
+  type Rubric,
+  type Series,
+} from "@/types/member-article";
 
 async function uploadArticleImage(
   supabase: ReturnType<typeof createClient>,
@@ -108,6 +116,8 @@ function Toolbar({
   );
 }
 
+type RelatedOption = { id: string; label: string };
+
 export default function ArticleEditor({
   mode,
   userId,
@@ -121,7 +131,18 @@ export default function ArticleEditor({
 }) {
   const router = useRouter();
   const [title, setTitle] = useState(article?.title || "");
+  const [subtitle, setSubtitle] = useState(article?.subtitle || "");
   const [rubric, setRubric] = useState<Rubric>(article?.rubric || RUBRICS[0].id);
+  const [series, setSeries] = useState<Series | "">(article?.series || "");
+  const [tagsInput, setTagsInput] = useState((article?.tags || []).join(", "));
+  const [template, setTemplate] = useState<ArticleTemplate>(article?.template || "feature");
+  const [credits, setCredits] = useState(article?.credits || "");
+  const [seoTitle, setSeoTitle] = useState(article?.seo_title || "");
+  const [metaDescription, setMetaDescription] = useState(article?.meta_description || "");
+  const [relatedEventId, setRelatedEventId] = useState(article?.related_event_id || "");
+  const [relatedLocationId, setRelatedLocationId] = useState(article?.related_location_id || "");
+  const [eventOptions, setEventOptions] = useState<RelatedOption[]>([]);
+  const [locationOptions, setLocationOptions] = useState<RelatedOption[]>([]);
   const [publishDate, setPublishDate] = useState(
     article?.published_at
       ? article.published_at.slice(0, 10)
@@ -135,6 +156,20 @@ export default function ArticleEditor({
 
   const coverInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from("events")
+      .select("id, title")
+      .eq("status", "published")
+      .then(({ data }) => setEventOptions((data || []).map((e) => ({ id: e.id, label: e.title }))));
+    supabase
+      .from("places")
+      .select("id, name")
+      .eq("status", "published")
+      .then(({ data }) => setLocationOptions((data || []).map((p) => ({ id: p.id, label: p.name }))));
+  }, []);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -199,8 +234,32 @@ export default function ArticleEditor({
     const supabase = createClient();
     const content = editor.getHTML();
     // Anchor at UTC noon (not midnight) so the chosen calendar date can't roll
-    // to the previous/next day when read back in a different timezone.
+    // to the previous/next day when read back in a different timezone. A
+    // future date here means the article stays hidden from public reads
+    // (repository.getPublishedArticles filters on published_at <= now()) —
+    // this is how "schedule" works, no separate status needed.
     const publishedAtIso = new Date(`${publishDate}T12:00:00Z`).toISOString();
+    const tags = tagsInput
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+
+    const sharedFields = {
+      title: title.trim(),
+      subtitle: subtitle.trim() || null,
+      rubric,
+      series: series || null,
+      tags,
+      template,
+      content,
+      cover_image: coverImage,
+      credits: credits.trim() || null,
+      seo_title: seoTitle.trim() || null,
+      meta_description: metaDescription.trim() || null,
+      related_event_id: relatedEventId || null,
+      related_location_id: relatedLocationId || null,
+      status,
+    };
 
     try {
       if (mode === "new") {
@@ -210,13 +269,9 @@ export default function ArticleEditor({
           .insert({
             author_id: userId,
             author_name: authorName,
-            title: title.trim(),
             slug,
-            rubric,
-            content,
-            cover_image: coverImage,
-            status,
             published_at: status === "published" ? publishedAtIso : null,
+            ...sharedFields,
           })
           .select()
           .single();
@@ -229,11 +284,7 @@ export default function ArticleEditor({
         const { error: updateError } = await supabase
           .from("articles")
           .update({
-            title: title.trim(),
-            rubric,
-            content,
-            cover_image: coverImage,
-            status,
+            ...sharedFields,
             ...(status === "published" ? { published_at: publishedAtIso } : {}),
           })
           .eq("id", article.id);
@@ -327,11 +378,28 @@ export default function ArticleEditor({
           )}
         </div>
 
-        {/* Rubric + Publish Date */}
+        {/* Series + Rubric + Publish Date */}
         <div className="mb-6 flex flex-wrap gap-6">
           <div>
             <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
-              Rubric
+              Series (primary — Editorials tab)
+            </label>
+            <select
+              value={series}
+              onChange={(e) => setSeries(e.target.value as Series | "")}
+              className="bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            >
+              <option value="">Uncategorized</option>
+              {SERIES.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Rubric (secondary tag)
             </label>
             <select
               value={rubric}
@@ -355,15 +423,49 @@ export default function ArticleEditor({
               onChange={(e) => setPublishDate(e.target.value)}
               className="bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
             />
+            <p className="text-2xs text-faint font-sans mt-1 max-w-[16rem]">
+              A future date keeps this hidden from the public site until then.
+            </p>
           </div>
         </div>
 
-        {/* Title */}
+        {/* Template */}
+        <div className="mb-6">
+          <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+            Layout Template
+          </label>
+          <div className="flex flex-wrap gap-3">
+            {TEMPLATES.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setTemplate(t.id)}
+                aria-pressed={template === t.id}
+                title={t.description}
+                className={`px-4 py-2.5 text-xs font-sans border transition-colors duration-200 text-left ${
+                  template === t.id
+                    ? "border-ember text-ivory bg-ember/10"
+                    : "border-white/10 text-muted hover:text-ivory hover:border-white/30"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Title + subtitle */}
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Article title"
-          className="w-full bg-transparent border-none text-ivory font-display text-4xl sm:text-5xl leading-tight placeholder:text-ivory/20 focus:outline-none mb-8"
+          className="w-full bg-transparent border-none text-ivory font-display text-4xl sm:text-5xl leading-tight placeholder:text-ivory/20 focus:outline-none mb-4"
+        />
+        <input
+          value={subtitle}
+          onChange={(e) => setSubtitle(e.target.value)}
+          placeholder="Subtitle / dek (optional)"
+          className="w-full bg-transparent border-none text-ivory/70 font-serif text-xl leading-snug placeholder:text-ivory/20 focus:outline-none mb-8"
         />
 
         {/* Toolbar + editor */}
@@ -385,6 +487,98 @@ export default function ArticleEditor({
         />
         <div className="py-8">
           <EditorContent editor={editor} />
+        </div>
+
+        {/* Extra metadata */}
+        <div className="mt-4 pt-8 border-t border-white/8 space-y-6">
+          <h2 className="font-serif text-lg text-ivory">Additional Details</h2>
+
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Tags (comma-separated, optional)
+            </label>
+            <input
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
+              placeholder="e.g. sustainability, menswear, MFW26"
+              className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Credits (optional)
+            </label>
+            <input
+              value={credits}
+              onChange={(e) => setCredits(e.target.value)}
+              placeholder="e.g. Photography by ..."
+              className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+                Related Event (optional)
+              </label>
+              <select
+                value={relatedEventId}
+                onChange={(e) => setRelatedEventId(e.target.value)}
+                className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+              >
+                <option value="">None</option>
+                {eventOptions.map((o) => (
+                  <option key={o.id} value={o.id}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+                Related Map Location (optional)
+              </label>
+              <select
+                value={relatedLocationId}
+                onChange={(e) => setRelatedLocationId(e.target.value)}
+                className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-2.5 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+              >
+                <option value="">None</option>
+                {locationOptions.map((o) => (
+                  <option key={o.id} value={o.id}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              SEO Title (optional — defaults to the article title)
+            </label>
+            <input
+              value={seoTitle}
+              onChange={(e) => setSeoTitle(e.target.value)}
+              placeholder={title || "Article title"}
+              className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors"
+            />
+          </div>
+
+          <div>
+            <label className="text-2xs text-muted tracking-editorial uppercase font-sans block mb-2">
+              Meta Description (optional, for search/social previews)
+            </label>
+            <textarea
+              value={metaDescription}
+              onChange={(e) => setMetaDescription(e.target.value)}
+              rows={2}
+              maxLength={200}
+              placeholder="One or two sentences summarizing the article."
+              className="w-full bg-charcoal border border-white/10 text-ivory px-4 py-3 font-sans text-sm focus:outline-none focus:border-white/30 transition-colors resize-none"
+            />
+          </div>
         </div>
       </div>
     </div>

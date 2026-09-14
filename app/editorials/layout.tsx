@@ -5,7 +5,7 @@ export default function EditorialsLayout({ children }: { children: React.ReactNo
   return (
     <>
       <Navbar />
-      <main className="pt-20">{children}</main>
+      <main id="main-content" className="pt-20">{children}</main>
       <Footer />
     </>
   );

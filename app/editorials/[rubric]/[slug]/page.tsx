@@ -1,14 +1,64 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
-import AnimatedSection from "@/components/ui/AnimatedSection";
-import CopyLinkButton from "@/components/ui/CopyLinkButton";
+import RelatedArticles from "@/components/editorial/RelatedArticles";
+import FeatureTemplate from "@/components/editorial/templates/FeatureTemplate";
+import PortraitInterviewTemplate from "@/components/editorial/templates/PortraitInterviewTemplate";
+import LandscapeSpreadTemplate from "@/components/editorial/templates/LandscapeSpreadTemplate";
+import TypographicTemplate from "@/components/editorial/templates/TypographicTemplate";
 import { createClient } from "@/lib/supabase/server";
-import { formatDate, estimateReadingTime } from "@/lib/utils";
+import { getPublishedArticles, getRelatedArticlesFor } from "@/lib/repository";
 import { RUBRICS, type MemberArticle } from "@/types/member-article";
 
 export const revalidate = 0;
+
+async function getArticle(rubric: string, slug: string): Promise<MemberArticle | null> {
+  const supabase = createClient();
+  const { data } = await supabase
+    .from("articles")
+    .select("*")
+    .eq("slug", slug)
+    .eq("rubric", rubric)
+    .eq("status", "published")
+    .lte("published_at", new Date().toISOString())
+    .single();
+  return (data as MemberArticle) || null;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { rubric: string; slug: string };
+}): Promise<Metadata> {
+  const article = await getArticle(params.rubric, params.slug);
+  if (!article) return {};
+
+  const title = article.seo_title || article.title;
+  const description = article.meta_description || article.subtitle || undefined;
+  const image = article.social_image || article.cover_image || undefined;
+
+  return {
+    title: `${title} — BS4F`,
+    description,
+    alternates: { canonical: `/editorials/${params.rubric}/${params.slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: image ? [{ url: image }] : undefined,
+      publishedTime: article.published_at || undefined,
+      authors: [article.author_name],
+    },
+  };
+}
+
+const TEMPLATE_COMPONENTS = {
+  feature: FeatureTemplate,
+  "portrait-interview": PortraitInterviewTemplate,
+  "landscape-spread": LandscapeSpreadTemplate,
+  typographic: TypographicTemplate,
+} as const;
 
 export default async function ArticlePage({
   params,
@@ -18,22 +68,36 @@ export default async function ArticlePage({
   const meta = RUBRICS.find((r) => r.id === params.rubric);
   if (!meta) notFound();
 
-  const supabase = createClient();
-  const { data: article } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("slug", params.slug)
-    .eq("rubric", params.rubric)
-    .eq("status", "published")
-    .single();
-
+  const article = await getArticle(params.rubric, params.slug);
   if (!article) notFound();
 
-  const typedArticle = article as MemberArticle;
-  const safeContent = DOMPurify.sanitize(typedArticle.content);
+  const safeContent = DOMPurify.sanitize(article.content);
+  const supabase = createClient();
+  const allPublished = await getPublishedArticles(supabase);
+  const related = getRelatedArticlesFor(article, allPublished);
+
+  const TemplateComponent = TEMPLATE_COMPONENTS[article.template] || FeatureTemplate;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.meta_description || article.subtitle || undefined,
+    image: article.social_image || article.cover_image || undefined,
+    datePublished: article.published_at || undefined,
+    dateModified: article.updated_at,
+    author: { "@type": "Person", name: article.author_name },
+    publisher: { "@type": "Organization", name: "Bocconi Students for Fashion" },
+  };
 
   return (
     <>
+      {/* eslint-disable-next-line react/no-danger */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="fixed top-20 left-6 z-40 hidden lg:block">
         <Link
           href="/editorials"
@@ -43,70 +107,13 @@ export default async function ArticlePage({
         </Link>
       </div>
 
-      {typedArticle.cover_image ? (
-        <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
-          <Image
-            src={typedArticle.cover_image}
-            alt={typedArticle.title}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent" />
-          <div className="absolute inset-0 flex items-end pb-16 px-6">
-            <div className="max-w-3xl mx-auto w-full">
-              <p className="text-2xs text-ember tracking-[0.3em] uppercase font-sans mb-4">
-                {meta.label}
-              </p>
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-ivory leading-tight">
-                {typedArticle.title}
-              </h1>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className="bg-obsidian pt-16 pb-8 px-6">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-2xs text-ember tracking-[0.3em] uppercase font-sans mb-4">
-              {meta.label}
-            </p>
-            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-ivory leading-tight">
-              {typedArticle.title}
-            </h1>
-          </div>
-        </section>
-      )}
+      <TemplateComponent article={article} safeContent={safeContent} rubricLabel={meta.label} />
 
-      <section className="bg-obsidian py-16 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between gap-4 mb-12 pb-6 border-b border-white/8 flex-wrap">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-charcoal-mid flex items-center justify-center shrink-0">
-                <span className="font-serif text-sm text-ivory/70">
-                  {typedArticle.author_name.charAt(0).toUpperCase()}
-                </span>
-              </div>
-              <div>
-                <p className="text-sm text-ivory font-sans">Written by {typedArticle.author_name}</p>
-                <p className="text-2xs text-muted font-sans">
-                  {typedArticle.published_at ? formatDate(typedArticle.published_at) : ""}
-                  {" · "}
-                  {estimateReadingTime(typedArticle.content)} min read
-                </p>
-              </div>
-            </div>
-            <CopyLinkButton />
-          </div>
-
-          <AnimatedSection>
-            <div
-              className="prose prose-invert prose-lg max-w-none font-sans text-ivory/80 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: safeContent }}
-            />
-          </AnimatedSection>
+      <div className="bg-obsidian px-6 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <RelatedArticles articles={related} />
         </div>
-      </section>
+      </div>
     </>
   );
 }

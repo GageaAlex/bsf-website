@@ -16,10 +16,10 @@ const config: Config = {
         "charcoal-mid": "#222222",
         smoke: "#2A2A2A",
         ash: "#3A3A3A",
-        // Accent
-        ember: "#C0392B",
-        "ember-light": "#E74C3C",
-        "ember-dark": "#96281B",
+        // Accent — dark red per brand swatch (#950606)
+        ember: "#950606",
+        "ember-light": "#B91C1C",
+        "ember-dark": "#5C0303",
         amber: "#D35400",
         // Text
         ivory: "#F5F0EB",

@@ -4,23 +4,28 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import SocialLinks from "@/components/ui/SocialLinks";
 
 const navLinks = [
   {
     label: "About",
     href: "/about",
     dropdown: [
-      { label: "Our Story", href: "/about/story" },
-      { label: "Board & Members", href: "/about/board" },
+      { label: "About Us", href: "/about/story" },
+      { label: "Meet the Team", href: "/about/board" },
       { label: "Alumni", href: "/about/alumni" },
       { label: "For Professionals", href: "/about/professionals" },
     ],
   },
   { label: "Editorials", href: "/editorials" },
   { label: "Events", href: "/events" },
+  { label: "Map", href: "/map" },
   { label: "Gallery", href: "/gallery" },
   { label: "Join Our Team", href: "/join" },
 ];
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,6 +33,8 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileDrawerRef = useRef<HTMLDivElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -39,6 +46,53 @@ export default function Navbar() {
     setMobileOpen(false);
     setActiveDropdown(null);
   }, [pathname]);
+
+  // Close the desktop dropdown on outside click / Escape.
+  useEffect(() => {
+    if (!activeDropdown) return;
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveDropdown(null);
+    };
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [activeDropdown]);
+
+  // Mobile drawer: Escape-to-close, focus trap, focus restoration.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const drawer = mobileDrawerRef.current;
+    const focusable = drawer?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+    focusable?.[0]?.focus();
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        mobileToggleRef.current?.focus();
+        return;
+      }
+      if (e.key !== "Tab" || !focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [mobileOpen]);
 
   return (
     <>
@@ -52,13 +106,13 @@ export default function Navbar() {
             : "bg-transparent py-5"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <nav aria-label="Primary" className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/home" className="group flex items-center gap-2">
             <span className="font-serif text-2xl text-ivory tracking-wider group-hover:text-ember transition-colors duration-300">
               BS4F
             </span>
-            <span className="hidden sm:block w-px h-5 bg-ash" />
+            <span className="hidden sm:block w-px h-5 bg-ember/40" />
             <span className="hidden sm:block text-2xs text-muted tracking-editorial uppercase font-sans">
               Bocconi Students for Fashion
             </span>
@@ -70,8 +124,12 @@ export default function Navbar() {
               <div key={link.href} className="relative">
                 {link.dropdown ? (
                   <button
-                    onMouseEnter={() => setActiveDropdown(link.label)}
-                    onMouseLeave={() => setActiveDropdown(null)}
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={activeDropdown === link.label}
+                    onClick={() =>
+                      setActiveDropdown(activeDropdown === link.label ? null : link.label)
+                    }
                     className={`text-xs tracking-editorial uppercase font-sans transition-colors duration-200 flex items-center gap-1 ${
                       pathname.startsWith(link.href)
                         ? "text-ivory"
@@ -79,20 +137,31 @@ export default function Navbar() {
                     }`}
                   >
                     {link.label}
-                    <svg className="w-3 h-3 transition-transform duration-200" style={{ transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg
+                      className="w-3 h-3 transition-transform duration-200"
+                      style={{ transform: activeDropdown === link.label ? "rotate(180deg)" : "rotate(0deg)" }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
                 ) : (
                   <Link
                     href={link.href}
-                    className={`text-xs tracking-editorial uppercase font-sans transition-colors duration-200 ${
+                    aria-current={pathname.startsWith(link.href) ? "page" : undefined}
+                    className={`relative text-xs tracking-editorial uppercase font-sans transition-colors duration-200 ${
                       pathname.startsWith(link.href)
                         ? "text-ivory"
                         : "text-muted hover:text-ivory"
                     }`}
                   >
                     {link.label}
+                    {pathname.startsWith(link.href) && (
+                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-ember" />
+                    )}
                   </Link>
                 )}
 
@@ -105,14 +174,15 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.2 }}
-                        onMouseEnter={() => setActiveDropdown(link.label)}
-                        onMouseLeave={() => setActiveDropdown(null)}
+                        role="menu"
+                        aria-label={link.label}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-charcoal border border-white/8 rounded-sm shadow-2xl overflow-hidden"
                       >
                         {link.dropdown.map((item, i) => (
                           <Link
                             key={item.href}
                             href={item.href}
+                            role="menuitem"
                             className={`block px-5 py-3 text-xs tracking-editorial uppercase font-sans text-muted hover:text-ivory hover:bg-white/5 transition-colors duration-150 ${
                               i !== link.dropdown!.length - 1
                                 ? "border-b border-white/5"
@@ -132,9 +202,13 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
+            ref={mobileToggleRef}
+            type="button"
             className="lg:hidden flex flex-col gap-1.5 p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-drawer"
           >
             <motion.span
               animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -156,6 +230,11 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-nav-drawer"
+            ref={mobileDrawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
@@ -173,6 +252,8 @@ export default function Navbar() {
                     {link.dropdown ? (
                       <>
                         <button
+                          type="button"
+                          aria-expanded={activeDropdown === link.label}
                           onClick={() =>
                             setActiveDropdown(
                               activeDropdown === link.label ? null : link.label
@@ -181,7 +262,7 @@ export default function Navbar() {
                           className="w-full text-left py-4 border-b border-white/8 font-display text-3xl text-ivory flex items-center justify-between"
                         >
                           {link.label}
-                          <svg className={`w-5 h-5 text-muted transition-transform duration-300 ${activeDropdown === link.label ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className={`w-5 h-5 text-muted transition-transform duration-300 ${activeDropdown === link.label ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
@@ -219,10 +300,8 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="mt-auto flex gap-6">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ivory transition-colors text-xs tracking-editorial uppercase">Instagram</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ivory transition-colors text-xs tracking-editorial uppercase">LinkedIn</a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-ivory transition-colors text-xs tracking-editorial uppercase">TikTok</a>
+            <div className="mt-auto">
+              <SocialLinks />
             </div>
           </motion.div>
         )}

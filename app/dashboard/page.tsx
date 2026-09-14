@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { MemberArticle } from "@/types/member-article";
 import type { MemberEvent } from "@/types/member-event";
 import DashboardClient from "./DashboardClient";
+
+export const metadata: Metadata = { title: "Dashboard — BS4F", robots: { index: false } };
 
 export default async function DashboardPage() {
   const supabase = createClient();

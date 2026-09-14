@@ -5,7 +5,7 @@ export default function JoinLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Navbar />
-      <main className="pt-20">{children}</main>
+      <main id="main-content" className="pt-20">{children}</main>
       <Footer />
     </>
   );

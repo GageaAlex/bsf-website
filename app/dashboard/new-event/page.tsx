@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import EventEditor from "@/components/dashboard/EventEditor";
+
+export const metadata: Metadata = { title: "New Event — BS4F", robots: { index: false } };
 
 export default async function NewEventPage() {
   const supabase = createClient();

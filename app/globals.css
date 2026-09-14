@@ -42,14 +42,50 @@ body {
   background: #0A0A0A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C0392B;
+  background: #950606;
   border-radius: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: #C0392B;
+  background: #950606;
   color: #F5F0EB;
+}
+
+/* Visible keyboard focus, everywhere */
+:focus-visible {
+  outline: 2px solid #B91C1C;
+  outline-offset: 2px;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 200;
+  background: #950606;
+  color: #F5F0EB;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Belt-and-suspenders reduced-motion: Framer Motion elements are handled via
+   MotionConfig(reducedMotion="user") in app/layout.tsx; this covers plain CSS
+   transitions/animations outside of it. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Hide scrollbar for horizontal scroll containers */
@@ -86,6 +122,34 @@ body {
   .tracking-wide-xl {
     letter-spacing: 0.3em;
   }
+}
+
+/* Pull quotes — any blockquote inside article prose (Tiptap outputs these
+   from the editor's "Quote" toolbar button). */
+.prose blockquote {
+  border-left: none !important;
+  border-top: 1px solid rgba(149, 6, 6, 0.4);
+  border-bottom: 1px solid rgba(149, 6, 6, 0.4);
+  padding: 1.5rem 0 !important;
+  margin: 2.5rem 0 !important;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.35;
+  color: #F5F0EB;
+  quotes: none;
+}
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none !important;
+}
+
+/* Keep images/quotes from splitting across columns (landscape-spread
+   article template uses a 2-column prose block). */
+.prose img,
+.prose blockquote,
+.prose figure {
+  break-inside: avoid;
 }
 
 /* Page transition overlay */

@@ -45,17 +45,7 @@ export default function SplashPage() {
         transition={{ duration: 0.5 }}
         className="relative z-10 flex flex-col items-center gap-10 px-6 text-center"
       >
-        {/* Eyebrow */}
-        <motion.p
-          initial={{ opacity: 0, letterSpacing: "0.5em" }}
-          animate={{ opacity: 1, letterSpacing: "0.3em" }}
-          transition={{ duration: 1.2, delay: 0.4 }}
-          className="text-2xs text-ivory/50 uppercase font-sans tracking-[0.3em]"
-        >
-          Bocconi University &nbsp;·&nbsp; Milan
-        </motion.p>
-
-        {/* Logo — white crest replaces the text "BS4F" */}
+        {/* Logo — white crest, above the eyebrow text (per Matilde's request) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -71,6 +61,16 @@ export default function SplashPage() {
             priority
           />
         </motion.div>
+
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, letterSpacing: "0.5em" }}
+          animate={{ opacity: 1, letterSpacing: "0.3em" }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="text-2xs text-ivory/50 uppercase font-sans tracking-[0.3em]"
+        >
+          Bocconi University &nbsp;·&nbsp; Milan
+        </motion.p>
 
         {/* Enter button */}
         <motion.button

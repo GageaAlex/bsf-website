@@ -1,17 +1,1154 @@
 [
-  { "id": "g1", "src": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", "alt": "MFW SS24 coverage", "category": "events" },
-  { "id": "g2", "src": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80", "alt": "Editorial shoot", "category": "editorial" },
-  { "id": "g3", "src": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80", "alt": "Runway details", "category": "events" },
-  { "id": "g4", "src": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80", "alt": "PFW backstage", "category": "events" },
-  { "id": "g5", "src": "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=800&q=80", "alt": "Team aperitivo", "category": "social" },
-  { "id": "g6", "src": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=80", "alt": "Sustainability panel", "category": "events" },
-  { "id": "g7", "src": "https://images.unsplash.com/photo-1558171813-c9d35ae66095?w=800&q=80", "alt": "Fashion archive", "category": "editorial" },
-  { "id": "g8", "src": "https://images.unsplash.com/photo-1609505848912-b7c3b8b4beda?w=800&q=80", "alt": "Industry interview setup", "category": "editorial" },
-  { "id": "g9", "src": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80", "alt": "Team photo 2024", "category": "social" },
-  { "id": "g10", "src": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80", "alt": "Street style Milan", "category": "editorial" },
-  { "id": "g11", "src": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80", "alt": "Runway front row", "category": "events" },
-  { "id": "g12", "src": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80", "alt": "Fashion portrait", "category": "editorial" },
-  { "id": "g13", "src": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80", "alt": "Shopping Milan", "category": "editorial" },
-  { "id": "g14", "src": "https://images.unsplash.com/photo-1589465885857-44edb59bbff2?w=800&q=80", "alt": "Fashion details", "category": "editorial" },
-  { "id": "g15", "src": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80", "alt": "Model backstage", "category": "events" }
+  {
+    "id": "g1",
+    "src": "/images/gallery/more-040-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g2",
+    "src": "/images/gallery/more-073-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g3",
+    "src": "/images/gallery/more-010-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g4",
+    "src": "/images/gallery/040-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g5",
+    "src": "/images/gallery/044-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g6",
+    "src": "/images/gallery/076-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g7",
+    "src": "/images/gallery/more-022-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g8",
+    "src": "/images/gallery/019-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g9",
+    "src": "/images/gallery/001-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g10",
+    "src": "/images/gallery/091-saelf.jpg",
+    "alt": "Saelf / Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf / Fondazione Sozzani"
+  },
+  {
+    "id": "g11",
+    "src": "/images/gallery/046-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g12",
+    "src": "/images/gallery/more-032-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g13",
+    "src": "/images/gallery/more-067-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g14",
+    "src": "/images/gallery/more-041-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g15",
+    "src": "/images/gallery/015-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g16",
+    "src": "/images/gallery/more-080-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g17",
+    "src": "/images/gallery/more-087-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g18",
+    "src": "/images/gallery/more-066-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g19",
+    "src": "/images/gallery/more-072-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g20",
+    "src": "/images/gallery/more-007-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g21",
+    "src": "/images/gallery/010-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g22",
+    "src": "/images/gallery/051-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g23",
+    "src": "/images/gallery/more-081-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g24",
+    "src": "/images/gallery/more-014-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g25",
+    "src": "/images/gallery/004-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g26",
+    "src": "/images/gallery/066-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g27",
+    "src": "/images/gallery/more-060-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g28",
+    "src": "/images/gallery/003-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g29",
+    "src": "/images/gallery/more-078-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g30",
+    "src": "/images/gallery/053-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g31",
+    "src": "/images/gallery/005-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g32",
+    "src": "/images/gallery/more-021-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g33",
+    "src": "/images/gallery/055-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g34",
+    "src": "/images/gallery/013-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g35",
+    "src": "/images/gallery/more-094-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g36",
+    "src": "/images/gallery/087-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g37",
+    "src": "/images/gallery/more-056-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g38",
+    "src": "/images/gallery/036-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g39",
+    "src": "/images/gallery/more-031-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g40",
+    "src": "/images/gallery/060-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g41",
+    "src": "/images/gallery/067-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g42",
+    "src": "/images/gallery/more-036-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g43",
+    "src": "/images/gallery/052-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g44",
+    "src": "/images/gallery/014-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g45",
+    "src": "/images/gallery/more-013-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g46",
+    "src": "/images/gallery/more-011-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g47",
+    "src": "/images/gallery/070-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g48",
+    "src": "/images/gallery/more-079-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g49",
+    "src": "/images/gallery/more-006-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g50",
+    "src": "/images/gallery/more-085-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g51",
+    "src": "/images/gallery/more-076-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g52",
+    "src": "/images/gallery/029-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g53",
+    "src": "/images/gallery/more-039-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g54",
+    "src": "/images/gallery/more-063-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g55",
+    "src": "/images/gallery/084-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g56",
+    "src": "/images/gallery/more-093-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g57",
+    "src": "/images/gallery/028-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g58",
+    "src": "/images/gallery/more-065-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g59",
+    "src": "/images/gallery/more-082-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g60",
+    "src": "/images/gallery/080-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g61",
+    "src": "/images/gallery/008-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g62",
+    "src": "/images/gallery/030-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g63",
+    "src": "/images/gallery/020-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g64",
+    "src": "/images/gallery/more-034-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g65",
+    "src": "/images/gallery/072-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g66",
+    "src": "/images/gallery/089-saelf.jpg",
+    "alt": "Saelf / Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf / Fondazione Sozzani"
+  },
+  {
+    "id": "g67",
+    "src": "/images/gallery/038-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g68",
+    "src": "/images/gallery/more-075-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g69",
+    "src": "/images/gallery/more-047-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g70",
+    "src": "/images/gallery/more-042-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g71",
+    "src": "/images/gallery/074-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g72",
+    "src": "/images/gallery/031-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g73",
+    "src": "/images/gallery/more-002-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g74",
+    "src": "/images/gallery/more-089-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g75",
+    "src": "/images/gallery/more-084-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g76",
+    "src": "/images/gallery/034-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g77",
+    "src": "/images/gallery/085-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g78",
+    "src": "/images/gallery/043-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g79",
+    "src": "/images/gallery/more-018-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g80",
+    "src": "/images/gallery/016-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g81",
+    "src": "/images/gallery/more-025-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g82",
+    "src": "/images/gallery/more-026-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g83",
+    "src": "/images/gallery/more-008-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g84",
+    "src": "/images/gallery/more-099-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g85",
+    "src": "/images/gallery/039-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g86",
+    "src": "/images/gallery/026-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g87",
+    "src": "/images/gallery/082-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g88",
+    "src": "/images/gallery/more-012-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g89",
+    "src": "/images/gallery/009-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g90",
+    "src": "/images/gallery/more-062-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g91",
+    "src": "/images/gallery/more-064-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g92",
+    "src": "/images/gallery/041-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g93",
+    "src": "/images/gallery/048-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g94",
+    "src": "/images/gallery/more-061-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g95",
+    "src": "/images/gallery/more-030-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g96",
+    "src": "/images/gallery/more-038-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g97",
+    "src": "/images/gallery/007-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g98",
+    "src": "/images/gallery/035-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g99",
+    "src": "/images/gallery/more-043-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g100",
+    "src": "/images/gallery/018-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g101",
+    "src": "/images/gallery/more-033-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g102",
+    "src": "/images/gallery/025-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g103",
+    "src": "/images/gallery/more-005-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g104",
+    "src": "/images/gallery/more-023-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g105",
+    "src": "/images/gallery/017-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g106",
+    "src": "/images/gallery/059-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g107",
+    "src": "/images/gallery/more-029-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g108",
+    "src": "/images/gallery/more-044-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g109",
+    "src": "/images/gallery/050-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g110",
+    "src": "/images/gallery/more-028-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g111",
+    "src": "/images/gallery/more-004-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g112",
+    "src": "/images/gallery/088-saelf.jpg",
+    "alt": "Saelf / Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf / Fondazione Sozzani"
+  },
+  {
+    "id": "g113",
+    "src": "/images/gallery/056-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g114",
+    "src": "/images/gallery/000-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g115",
+    "src": "/images/gallery/more-058-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g116",
+    "src": "/images/gallery/more-086-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g117",
+    "src": "/images/gallery/083-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g118",
+    "src": "/images/gallery/more-059-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g119",
+    "src": "/images/gallery/more-096-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g120",
+    "src": "/images/gallery/more-091-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g121",
+    "src": "/images/gallery/064-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g122",
+    "src": "/images/gallery/more-020-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g123",
+    "src": "/images/gallery/more-088-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g124",
+    "src": "/images/gallery/057-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g125",
+    "src": "/images/gallery/more-098-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g126",
+    "src": "/images/gallery/079-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g127",
+    "src": "/images/gallery/047-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g128",
+    "src": "/images/gallery/021-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g129",
+    "src": "/images/gallery/more-053-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g130",
+    "src": "/images/gallery/081-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g131",
+    "src": "/images/gallery/027-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g132",
+    "src": "/images/gallery/more-000-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g133",
+    "src": "/images/gallery/more-024-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g134",
+    "src": "/images/gallery/more-027-davii.jpg",
+    "alt": "Davii show, Milan Fashion Week FW26-27",
+    "category": "Davii"
+  },
+  {
+    "id": "g135",
+    "src": "/images/gallery/054-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g136",
+    "src": "/images/gallery/more-017-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g137",
+    "src": "/images/gallery/more-035-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g138",
+    "src": "/images/gallery/022-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g139",
+    "src": "/images/gallery/more-070-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g140",
+    "src": "/images/gallery/045-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g141",
+    "src": "/images/gallery/more-048-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g142",
+    "src": "/images/gallery/more-092-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g143",
+    "src": "/images/gallery/more-003-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g144",
+    "src": "/images/gallery/002-afraa.jpg",
+    "alt": "AFRAA show, Milan Fashion Week FW26-27",
+    "category": "AFRAA"
+  },
+  {
+    "id": "g145",
+    "src": "/images/gallery/037-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g146",
+    "src": "/images/gallery/092-saelf.jpg",
+    "alt": "Saelf / Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf / Fondazione Sozzani"
+  },
+  {
+    "id": "g147",
+    "src": "/images/gallery/more-051-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g148",
+    "src": "/images/gallery/090-saelf.jpg",
+    "alt": "Saelf / Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf / Fondazione Sozzani"
+  },
+  {
+    "id": "g149",
+    "src": "/images/gallery/more-054-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g150",
+    "src": "/images/gallery/077-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g151",
+    "src": "/images/gallery/more-046-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g152",
+    "src": "/images/gallery/012-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g153",
+    "src": "/images/gallery/more-083-pe-de-chumbo.jpg",
+    "alt": "Pe de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pe de Chumbo"
+  },
+  {
+    "id": "g154",
+    "src": "/images/gallery/065-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g155",
+    "src": "/images/gallery/058-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g156",
+    "src": "/images/gallery/more-050-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g157",
+    "src": "/images/gallery/049-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g158",
+    "src": "/images/gallery/006-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g159",
+    "src": "/images/gallery/more-095-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g160",
+    "src": "/images/gallery/more-097-saelf.jpg",
+    "alt": "Saelf Fondazione Sozzani show, Milan Fashion Week FW26-27",
+    "category": "Saelf Fondazione Sozzani"
+  },
+  {
+    "id": "g161",
+    "src": "/images/gallery/more-071-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g162",
+    "src": "/images/gallery/more-055-hui.jpg",
+    "alt": "HUI show, Milan Fashion Week FW26-27",
+    "category": "HUI"
+  },
+  {
+    "id": "g163",
+    "src": "/images/gallery/more-077-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g164",
+    "src": "/images/gallery/more-090-phan-dang.jpg",
+    "alt": "Phan Dang show, Milan Fashion Week FW26-27",
+    "category": "Phan Dang"
+  },
+  {
+    "id": "g165",
+    "src": "/images/gallery/more-068-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g166",
+    "src": "/images/gallery/more-069-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g167",
+    "src": "/images/gallery/062-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g168",
+    "src": "/images/gallery/042-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g169",
+    "src": "/images/gallery/more-052-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g170",
+    "src": "/images/gallery/068-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g171",
+    "src": "/images/gallery/more-016-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g172",
+    "src": "/images/gallery/more-049-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g173",
+    "src": "/images/gallery/075-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g174",
+    "src": "/images/gallery/086-remade-in-italy.jpg",
+    "alt": "ReMade in Italy show, Milan Fashion Week FW26-27",
+    "category": "ReMade in Italy"
+  },
+  {
+    "id": "g175",
+    "src": "/images/gallery/073-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g176",
+    "src": "/images/gallery/more-015-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g177",
+    "src": "/images/gallery/more-019-alchetipo.jpg",
+    "alt": "Alchetipo show, Milan Fashion Week FW26-27",
+    "category": "Alchetipo"
+  },
+  {
+    "id": "g178",
+    "src": "/images/gallery/078-pe-de-chumbo.jpg",
+    "alt": "Pé de Chumbo show, Milan Fashion Week FW26-27",
+    "category": "Pé de Chumbo"
+  },
+  {
+    "id": "g179",
+    "src": "/images/gallery/032-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g180",
+    "src": "/images/gallery/024-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g181",
+    "src": "/images/gallery/more-037-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g182",
+    "src": "/images/gallery/061-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g183",
+    "src": "/images/gallery/more-057-laura-biagiotti.jpg",
+    "alt": "Laura Biagiotti show, Milan Fashion Week FW26-27",
+    "category": "Laura Biagiotti"
+  },
+  {
+    "id": "g184",
+    "src": "/images/gallery/more-001-afraa.jpg",
+    "alt": "afraa show, Milan Fashion Week FW26-27",
+    "category": "afraa"
+  },
+  {
+    "id": "g185",
+    "src": "/images/gallery/033-enriquez.jpg",
+    "alt": "enriquez show, Milan Fashion Week FW26-27",
+    "category": "enriquez"
+  },
+  {
+    "id": "g186",
+    "src": "/images/gallery/more-045-ermanno-scervino.jpg",
+    "alt": "Ermanno Scervino show, Milan Fashion Week FW26-27",
+    "category": "Ermanno Scervino"
+  },
+  {
+    "id": "g187",
+    "src": "/images/gallery/071-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g188",
+    "src": "/images/gallery/069-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g189",
+    "src": "/images/gallery/more-074-mafi-mafi.jpg",
+    "alt": "MAFI MAFI show, Milan Fashion Week FW26-27",
+    "category": "MAFI MAFI"
+  },
+  {
+    "id": "g190",
+    "src": "/images/gallery/more-009-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  },
+  {
+    "id": "g191",
+    "src": "/images/gallery/023-alchetipo.jpg",
+    "alt": "Alchétipo show, Milan Fashion Week FW26-27",
+    "category": "Alchétipo"
+  },
+  {
+    "id": "g192",
+    "src": "/images/gallery/011-agl.jpg",
+    "alt": "AGL show, Milan Fashion Week FW26-27",
+    "category": "AGL"
+  }
 ]

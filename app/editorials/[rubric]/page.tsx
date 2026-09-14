@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { formatDate, estimateReadingTime } from "@/lib/utils";
-import { RUBRICS, type MemberArticle } from "@/types/member-article";
+import { filterArticlesByRubric, getPublishedArticles } from "@/lib/repository";
+import { RUBRICS, type Rubric } from "@/types/member-article";
 
 export const revalidate = 0;
 
@@ -11,19 +13,23 @@ export function generateStaticParams() {
   return RUBRICS.map((r) => ({ rubric: r.id }));
 }
 
+export function generateMetadata({ params }: { params: { rubric: string } }): Metadata {
+  const meta = RUBRICS.find((r) => r.id === params.rubric);
+  if (!meta) return {};
+  return {
+    title: `${meta.label} — BS4F Editorials`,
+    description: meta.description,
+    alternates: { canonical: `/editorials/${params.rubric}` },
+  };
+}
+
 export default async function RubricPage({ params }: { params: { rubric: string } }) {
   const meta = RUBRICS.find((r) => r.id === params.rubric);
   if (!meta) notFound();
 
   const supabase = createClient();
-  const { data: articles } = await supabase
-    .from("articles")
-    .select("*")
-    .eq("status", "published")
-    .eq("rubric", params.rubric)
-    .order("published_at", { ascending: false });
-
-  const rubricArticles = (articles as MemberArticle[]) || [];
+  const allPublished = await getPublishedArticles(supabase);
+  const rubricArticles = filterArticlesByRubric(allPublished, params.rubric as Rubric);
 
   return (
     <>
@@ -81,7 +87,12 @@ export default async function RubricPage({ params }: { params: { rubric: string 
                   </h2>
                   <p className="text-2xs text-muted font-sans">
                     {article.author_name}
-                    {article.published_at ? ` · ${formatDate(article.published_at)}` : ""}
+                    {article.published_at && (
+                      <>
+                        {" · "}
+                        <time dateTime={article.published_at}>{formatDate(article.published_at)}</time>
+                      </>
+                    )}
                   </p>
                 </Link>
               ))}
