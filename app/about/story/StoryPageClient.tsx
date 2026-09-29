@@ -7,11 +7,6 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { HAS_SOCIAL_LINKS } from "@/data/site-settings";
 
-// NOTE: this copy predates written sign-off from the BS4F team — the
-// requirements doc explicitly says "ABOUT US section needs to be drafted by
-// our team." See data/site-settings.ts ABOUT_US_SETTINGS for the flag and
-// where to swap in the approved text once it's supplied.
-
 const aboutPages = [
   { label: "Meet the Team", href: "/about/board" },
   { label: "Alumni", href: "/about/alumni" },
@@ -21,19 +16,21 @@ const aboutPages = [
 export default function StoryPageClient() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
+      {/* About Us — dark, black-and-white editorial photo with centered copy */}
+      <section className="relative min-h-[85vh] overflow-hidden flex items-center">
         <Image
-          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=85"
-          alt="BS4F team"
+          src="/images/gallery/044-ermanno-scervino.jpg"
+          alt="Backstage at a Milan Fashion Week show"
           fill
-          className="object-cover"
+          className="object-cover grayscale"
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-obsidian/60" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-obsidian to-transparent" />
-        <div className="relative z-10 flex flex-col items-start justify-end h-full max-w-7xl mx-auto px-6 pb-16">
+        <div className="absolute inset-0 bg-obsidian/75" />
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-obsidian/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-obsidian/80 to-transparent" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 py-24 text-center">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
@@ -46,68 +43,22 @@ export default function StoryPageClient() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-display text-[clamp(3rem,7vw,6rem)] text-ivory leading-none"
+            className="font-display text-[clamp(2.75rem,7vw,5.5rem)] text-ivory leading-none mb-10"
           >
-            Our Story
+            About Us
           </motion.h1>
-        </div>
-      </section>
 
-      {/* Body */}
-      <section className="bg-obsidian py-24 px-6">
-        <div className="max-w-3xl mx-auto">
-          <AnimatedSection>
-            <p className="font-serif text-2xl text-ivory/80 leading-relaxed mb-10">
-              BS4F, Bocconi Students for Fashion, started from a simple idea: fashion deserved
-              to be taken seriously at one of Europe&apos;s leading business schools.
+          <AnimatedSection delay={0.15}>
+            <p className="font-serif text-[clamp(1.15rem,2.4vw,1.6rem)] text-ivory leading-relaxed">
+              Bocconi Students For Fashion was founded in 2013, with the aim of bringing students
+              closer to their passion and their professional career aspirations in the fashion and
+              luxury world.
             </p>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
-            <div className="prose prose-invert prose-lg max-w-none text-ivory/65 font-sans leading-relaxed space-y-6">
-              <p>
-                Founded in 2022 by a group of students passionate about both fashion and business,
-                BS4F set out to bridge two worlds that rarely spoke to each other. We believed then,
-                and still believe now, that fashion says as much about culture, economics,
-                globalisation, and identity as any subject Bocconi teaches.
-              </p>
-              <p>
-                In just a few years, we have grown from a small group of enthusiasts meeting in
-                library rooms to a community of over 200 members, a recognised publication covering
-                everything from runway economics to sustainability policy, and a regular presence at
-                Milan and Paris Fashion Weeks.
-              </p>
-              <p>
-                We publish editorials across five rubrics. We organise panels, workshops, and social
-                events throughout the academic year. We send delegations to fashion weeks. We connect
-                our members with industry professionals. And we do all of it with the rigour,
-                curiosity, and ambition that a Bocconi education demands.
-              </p>
-              <p>
-                We&apos;re writers, strategists, event producers, and visual thinkers who share one
-                belief: fashion is worth thinking about carefully.
-              </p>
-            </div>
-          </AnimatedSection>
-
-          {/* Pull quote */}
-          <AnimatedSection delay={0.2}>
-            <blockquote className="my-16 pl-8 border-l-2 border-ember">
-              <p className="font-serif text-2xl text-ivory/75 leading-relaxed italic">
-                &ldquo;We believe fashion is the most compelling lens through which to understand
-                culture, business, and society.&rdquo;
-              </p>
-            </blockquote>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
-            <div className="prose prose-invert prose-lg max-w-none text-ivory/65 font-sans leading-relaxed">
-              <p>
-                Our team changes each year. What stays the same is the standard we hold ourselves to:
-                original thinking, genuine curiosity, and a refusal to treat fashion as anything less
-                than the serious subject it is.
-              </p>
-            </div>
+            <p className="font-serif text-[clamp(1.15rem,2.4vw,1.6rem)] text-ivory leading-relaxed mt-6">
+              By joining this association you will get the chance to broaden your network, develop
+              new skills, and most importantly, have fun while building your path towards a
+              successful career in the fashion and luxury industry!
+            </p>
           </AnimatedSection>
         </div>
       </section>

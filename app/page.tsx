@@ -108,7 +108,7 @@ export default function SplashPage() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 right-8 text-2xs text-ivory/50 tracking-editorial uppercase font-sans hidden sm:block"
       >
-        Est. 2022
+        Est. 2013
       </motion.div>
     </div>
   );

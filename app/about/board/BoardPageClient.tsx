@@ -91,14 +91,14 @@ export default function BoardPageClient() {
 
   return (
     <>
-      {/* Hero — real BS4F board photo (2025/2026), replaceable as a new one is supplied */}
+      {/* Hero — same audience photo used for the "Meet the Team" row on /home */}
       <section className="relative h-[70vh] min-h-[480px] overflow-hidden flex items-end">
         <Image
-          src="/images/board-2025-2026.jpg"
-          alt="BS4F board members for the 2025/2026 term, standing together outdoors."
+          src="/images/ermanno-scervino-audience.jpg"
+          alt="BS4F members at the Ermanno Scervino show, Milan Fashion Week."
           fill
           priority
-          className="object-cover object-[center_35%]"
+          className="object-cover"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent" />

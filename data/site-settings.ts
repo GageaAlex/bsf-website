@@ -22,29 +22,25 @@ export const SOCIAL_LINKS: SocialLinks = {
 
 export const HAS_SOCIAL_LINKS = Object.values(SOCIAL_LINKS).some(Boolean);
 
-export type ApplicationStep = {
-  title: string;
-  description: string;
-};
-
 export type ApplicationSettings = {
   // ISO "YYYY-MM-DD", interpreted in Europe/Rome local time.
   openDate: string | null;
   closeDate: string | null;
-  steps: ApplicationStep[];
   googleFormUrl: string | null;
   eligibility: string | null;
   contactEmail: string | null;
 };
 
-// Pending: "Steps to applying to BS4F still need to be drafted + google form
-// link placed on the website for the duration of applications" (doc). Once
-// BS4F supplies these, fill in steps/googleFormUrl/dates here — the /join
-// page and home CTA both read from this object and update automatically.
+// Application window for the Sept 2026 recruitment round (doc: "Thursday
+// September 17th 9:00am" – "Monday September 21st 7:00pm"). The exact
+// copy for the /join page lives directly on JoinPageClient.tsx, same as
+// the approved About Us copy on StoryPageClient.tsx — this object just
+// drives the open/closed boolean the /join page and home CTA read from.
+// No Google Form link was supplied ("link will be in our bio" per the
+// brief) — leave googleFormUrl null until BS4F provides one.
 export const APPLICATION_SETTINGS: ApplicationSettings = {
-  openDate: null,
-  closeDate: null,
-  steps: [],
+  openDate: "2026-09-17",
+  closeDate: "2026-09-21",
   googleFormUrl: null,
   eligibility: null,
   contactEmail: null,
@@ -99,16 +95,41 @@ export const EVENTS_HERO_SETTINGS: EventsHeroSettings = {
 };
 
 export type AboutUsSettings = {
-  // The doc explicitly says "ABOUT US section needs to be drafted by our
-  // team" — the current prose on /about/story predates that note and has
-  // not been confirmed as final client copy. Flagged here so an editor
-  // knows to replace it; not shown on the live page.
+  // The doc originally said "ABOUT US section needs to be drafted by our
+  // team" — BS4F has since supplied final copy (Sept 2026 brief) and it's
+  // live on /about/story. Flagged here so an editor can see at a glance
+  // that the current copy is confirmed, not a placeholder.
   isApprovedFinal: boolean;
   note: string;
 };
 
 export const ABOUT_US_SETTINGS: AboutUsSettings = {
-  isApprovedFinal: false,
+  isApprovedFinal: true,
   note:
-    "Draft copy pending final sign-off from the BS4F team (see requirements doc, Sept 2026). Replace app/about/story/page.tsx copy once approved and set isApprovedFinal to true.",
+    "Final copy supplied by the BS4F team (Sept 2026 brief) and live on app/about/story/StoryPageClient.tsx.",
+};
+
+export type AnnouncementSettings = {
+  // Turn the whole modal off without touching AnnouncementModal.tsx.
+  enabled: boolean;
+  // Bump this when the content below changes so the modal reappears even
+  // for visitors who already dismissed an earlier announcement this
+  // session — it's part of the sessionStorage dismissal key.
+  id: string;
+  heading: string;
+  date: string;
+  time: string;
+  message: string;
+};
+
+// Single source of truth for the entry announcement modal (components/ui/
+// AnnouncementModal.tsx, shown on /home). Update the copy here — no need
+// to touch the component itself.
+export const ANNOUNCEMENT_SETTINGS: AnnouncementSettings = {
+  enabled: true,
+  id: "associations-on-display-2026-09-17",
+  heading: "Associations on Display",
+  date: "Thursday 17th",
+  time: "10:00–18:30",
+  message: "Waiting for you!",
 };

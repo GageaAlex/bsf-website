@@ -28,7 +28,7 @@ app/
   layout.tsx             # Root layout (fonts, metadata, MotionConfig, skip link)
   home/                  # Home page (/home) — compact section index, not full-height panels
   about/
-    story/               # About Us / Our Story (/about/story) — draft copy, see data/site-settings.ts
+    story/               # About Us (/about/story) — final copy from the BS4F team, see data/site-settings.ts
     board/               # Meet the Team (/about/board) — board hero + full roster directory
     alumni/              # Alumni (/about/alumni) — name/year/LinkedIn only, no photos
     professionals/       # For Professionals (/about/professionals)
@@ -61,6 +61,7 @@ components/
   layout/
     Navbar.tsx           # Sticky nav, keyboard/click-accessible dropdown, mobile drawer with focus trap
     Footer.tsx           # Site footer
+    AnnouncementModal.tsx # Dismissible entry announcement, config in data/site-settings.ts (ANNOUNCEMENT_SETTINGS)
   ui/
     AnimatedSection.tsx  # Scroll-triggered reveal wrapper
     PageTransition.tsx   # Page-level fade transitions
@@ -135,7 +136,7 @@ Edit `data/alumni.json`. Add `{ "id", "name", "year", "linkedin" }` — delibera
 Edit `data/gallery.json`. Add `{ "id", "src", "alt", "category" }`, with images under `public/images/gallery/`. Currently seeded with 92 photos sampled (~1 in 3 per show) from the Comms team's MFW FW26-27 Drive folder, resized/compressed for web and downsized from HEIC where needed. Add more from the same Drive (or a future one) the same way — download, `sips -s format jpeg` for any `.HEIC` files, resize to ≤1800px on the long edge, drop into `public/images/gallery/`, and add an entry here. The page's empty state only shows when this file is `[]`.
 
 ### Site-wide settings
-Edit `data/site-settings.ts` for: `SOCIAL_LINKS` (Instagram/TikTok/LinkedIn — a link only renders once its URL is set here), `APPLICATION_SETTINGS` (open/close dates, step-by-step instructions, Google Form URL, eligibility, contact — drives the `/join` page's open/closed state and CTA), `EVENTS_HERO_SETTINGS` (background video URL for the Events hero, falls back to a static image while unset), and `ABOUT_US_SETTINGS` (flags whether the `/about/story` copy has been approved as final by the BS4F team).
+Edit `data/site-settings.ts` for: `SOCIAL_LINKS` (Instagram/TikTok/LinkedIn — a link only renders once its URL is set here), `APPLICATION_SETTINGS` (open/close dates, Google Form URL, eligibility, contact — drives the `/join` page's open/closed state and CTA; the page copy itself lives on `JoinPageClient.tsx`), `EVENTS_HERO_SETTINGS` (background video URL for the Events hero, falls back to a static image while unset), `ABOUT_US_SETTINGS` (flags whether the `/about/story` copy has been approved as final by the BS4F team), and `ANNOUNCEMENT_SETTINGS` (heading/date/time/message and an `enabled` flag for the dismissible entry announcement modal on `/home`, rendered by `components/layout/AnnouncementModal.tsx`).
 
 ---
 

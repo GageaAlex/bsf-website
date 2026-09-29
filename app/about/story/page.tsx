@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import StoryPageClient from "./StoryPageClient";
 
 export const metadata: Metadata = {
-  title: "Our Story — BS4F",
-  description: "The story of Bocconi Students for Fashion.",
+  title: "About Us — BS4F",
+  description:
+    "Bocconi Students For Fashion was founded in 2013 to bring students closer to their passion and professional aspirations in fashion and luxury.",
   alternates: { canonical: "/about/story" },
 };
 

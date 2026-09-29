@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import AnnouncementModal from "@/components/layout/AnnouncementModal";
 import { APPLICATION_SETTINGS, isApplicationOpen } from "@/data/site-settings";
 
 type SectionEntry = {
@@ -130,6 +131,8 @@ export default function HomePage() {
 
   return (
     <>
+      <AnnouncementModal />
+
       {/* Hero */}
       <section ref={heroRef} className="relative h-screen overflow-hidden flex items-center justify-center">
         <motion.div style={{ y: heroY, scale: heroScale }} className="absolute inset-0 z-0">
